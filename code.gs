@@ -2,13 +2,13 @@
 // CONFIG
 // ===============================================================
 
-const SHEET_ID = "10mZUOHEjT3uYCsHtAGOYtZoQj0okJfaXA2IVNyuO40c"; // Vaše ID tabulky
+const SHEET_ID = ""; // Vaše ID tabulky
 const SHEET_NAME = "Songs";
 const LOG_SHEET_NAME = "SystemLog"; 
 
 // Cesty k webu
-const JSON_URL = "https://pisne.baptistejablonec.cz/data/songs.json";
-const API_ENDPOINT = "https://pisne.baptistejablonec.cz/api_receive_sync.php";
+const JSON_URL = "https://web.cz/data/songs.json";
+const API_ENDPOINT = "https://web.cz/api_receive_sync.php";
 
 // Definice hlavičky
 const HEADERS = ["Name", "Author", "Tempo", "Category", "Tags", "Count", "Last", "History"];
