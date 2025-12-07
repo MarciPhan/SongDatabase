@@ -1,128 +1,120 @@
-🎵 Knihovna a Generátor Písní pro Hudební Skupinku
+# 🎵 Knihovna a Generátor Písní pro Hudební Skupinku
 
-Jednoduchá webová aplikace pro správu písní, evidenci hraní a generování playlistů pro hudební skupinky (chvály).
+Jednoduchá, ale mocná webová aplikace pro správu písní, evidenci hraní a generování playlistů pro chválové skupiny.
 
-Aplikace funguje na principu PHP frontendu a JSON databáze, která se automaticky synchronizuje s Google Tabulkou (jako zálohou a administrací).
+Aplikace kombinuje **rychlost lokálního JSONu** s **robustností Google Tabulek**. Frontend běží na PHP a data se ukládají lokálně, zatímco na pozadí probíhá automatická synchronizace s Google Sheets, která slouží jako administrace a záloha.
 
-✨ Funkce
+---
 
-🎸 Pro uživatele (Frontend)
+## ✨ Funkce
 
-Seznam písní: Přehledná tabulka s řazením a filtrováním (podle názvu, kategorie, tagů).
+### 🎸 Pro uživatele (Frontend)
+* **Seznam písní:** Přehledná tabulka s řazením a filtrováním (podle názvu, kategorie, tagů).
+* **Zápis hraní:** Jednoduchý formulář pro rychlé zaznamenání, že se píseň hrála.
+* **Generátor playlistu:** Náhodný výběr písní podle kritérií (např. rychlé chvály, nehráno X měsíců, limit počtu písní).
+* **Historie:** Detailní přehled (kalendářní i seznamový) o tom, kdy a co se hrálo.
+* **Statistiky:** Grafický přehled nejčastěji hraných písní (Top 5).
 
-Zápis hraní: Jednoduchý formulář pro zaznamenání, že se píseň hrála (datum se uloží do historie).
+### 🛠 Pro správce (Editace)
+* **Přidat píseň:** Formulář pro vložení nové skladby.
+* **Upravit píseň:** Možnost změnit název, autora, tóninu, tempo i tagy.
+* **Editace historie:** Zpětná úprava nebo smazání konkrétního data hraní (pokud došlo k chybě při zápisu).
+* **Mazání písní:** Úplné odstranění písně z databáze.
 
-Generátor playlistu: Náhodný výběr písní podle kritérií (rychlá/pomalá, nehráno X měsíců, počet písní).
+### 🔄 Synchronizace (Backend)
+* Data se primárně ukládají do lokálního souboru `data/songs.json` (okamžitá odezva).
+* Při každé změně (zápis, úprava, smazání) se na pozadí asynchronně zavolá **Google Apps Script**.
+* Skript zajistí obousměrnou synchronizaci s Google Tabulkou, takže máte data vždy zálohovaná a přístupná i v Excelu.
 
-Historie: Kalendářní a seznamový přehled, kdy se co hrálo.
+---
 
-Statistiky: Graf nejhranějších písní.
+## 🚀 Instalace
 
-🛠 Pro správce (Editace)
+### 1. Požadavky
+* Webhosting s podporou **PHP 7.4** nebo novější.
+* Přístup k FTP pro nahrání souborů.
+* Google účet (pro vytvoření synchronizačního skriptu).
 
-Přidat píseň: Formulář pro vložení nové písně.
+### 2. Struktura souborů
+Nahrajte všechny soubory na váš server. Struktura by měla vypadat takto:
 
-Upravit píseň: Možnost změnit název, autora, tóninu, tempo i tagy.
-
-Editace historie: Zpětná úprava nebo smazání konkrétních dat hraní (když se spletete).
-
-Mazání písní: Odstranění písně z databáze.
-
-🔄 Synchronizace (Backend)
-
-Data se ukládají do lokálního souboru data/songs.json.
-
-Při každé změně (zápis, úprava) se na pozadí spustí Google Apps Script.
-
-Skript zajistí obousměrnou synchronizaci s Google Tabulkou (Excel), takže máte data vždy zálohovaná a přístupná i v tabulkovém procesoru.
-
-🚀 Instalace
-
-1. Požadavky
-
-Webhosting s podporou PHP 7.4+ (nebo novější).
-
-Přístup k FTP pro nahrání souborů.
-
-Google účet (pro Google Sheets synchronizaci).
-
-2. Nahrání souborů
-
-Nahrajte všechny soubory z tohoto repozitáře na váš server.
-
-Struktura:
-
+```text
 /
-├── index.php             (Hlavní aplikace)
-├── config.php            (Konfigurace cest)
-├── api_local.php         (Backend pro zápis hraní)
-├── api_add_song.php      (Backend pro přidání písně)
-├── api_manage_song.php   (Backend pro úpravu/mazání písně)
-├── api_manage_history.php(Backend pro úpravu historie)
-├── api_receive_sync.php  (Příjem dat z Google Sheets)
-├── styles.css            (Vzhled)
-└── data/                 (Složka pro data - MUSÍ MÍT PRÁVA ZÁPISU 777)
-    └── songs.json        (Databáze písní)
+├── index.php              # Hlavní aplikace (Frontend)
+├── config.php             # Konfigurace cest a API
+├── styles.css             # Styly vzhledu
+├── script.js              # Frontendová logika
+├── logic.php              # Pomocná PHP logika (načítání dat)
+├── api_local.php          # Backend pro zápis hraní
+├── api_add_song.php       # Backend pro přidání písně
+├── api_manage_song.php    # Backend pro úpravu/mazání písně
+├── api_manage_history.php # Backend pro úpravu historie
+├── api_receive_sync.php   # Příjem dat z Google Sheets (callback)
+├── api_search.php         # Vyhledávání (volitelné)
+└── data/                  # Složka pro data
+    └── songs.json         # Databáze písní
+````
 
+🚨 **Důležité:** Složka `data/` a soubor `songs.json` musí mít práva pro zápis (CHMOD 777 nebo 775 podle nastavení serveru).
 
-3. Konfigurace
+### 3\. Konfigurace webu
 
-Otevřete soubor config.php.
+Otevřete soubor `config.php` a nastavte cestu k databázi a URL vašeho skriptu (ten získáte v kroku 4).
 
-Nastavte cestu k vaší JSON databázi (pokud měníte složku).
-
-Vložte URL vašeho Google Apps Scriptu (viz níže).
-
+```php
 <?php
+// Cesta k lokální DB
 $LOCAL_DB = __DIR__ . "/data/songs.json";
+
+// URL Google Apps Scriptu (Deployment URL)
 $API_URL = "[https://script.google.com/macros/s/VAS_KOD_SKRIPTU/exec](https://script.google.com/macros/s/VAS_KOD_SKRIPTU/exec)";
 ?>
+```
 
+### 4\. Nastavení Google Sheets (Synchronizace)
 
-4. Nastavení Google Sheets (Synchronizace)
+Tato část propojí vaši aplikaci s Google Tabulkou.
 
-Vytvořte novou Google Tabulku.
+1.  Vytvořte novou **Google Tabulku**.
+2.  V horním menu přejděte na **Rozšíření (Extensions) \> Apps Script**.
+3.  Do editoru vložte kód ze souboru `code.gs` (součást tohoto projektu).
+4.  V kódu skriptu upravte proměnnou `SHEET_ID` (najdete ji v URL adrese vaší tabulky).
+5.  Klikněte na **Nasazení (Deploy) \> Nové nasazení (New deployment)**.
+6.  Vyberte typ: **Webová aplikace (Web app)**.
+7.  Nastavte oprávnění přesně takto:
+      * **Description:** (libovolné, např. "SongSync")
+      * **Execute as:** `Me` (Já)
+      * **Who has access:** `Anyone` (Kdokoliv)
+8.  Potvrďte a zkopírujte vygenerovanou **Web App URL**.
+9.  Tuto URL vložte do `config.php` na vašem webu.
 
-V horním menu vyberte Rozšíření > Apps Script.
+-----
 
-Zkopírujte obsah souboru code.gs (najdete v repozitáři nebo v dokumentaci) do editoru.
+## 💡 Jak to technicky funguje
 
-Upravte v kódu SHEET_ID (ID vaší tabulky z URL adresy).
+1.  **Čtení:** Aplikace čte data primárně z `data/songs.json`. Díky tomu je načítání okamžité a nezávisí na rychlosti Google API.
+2.  **Zápis:** Když uživatel zapíše hraní nebo upraví píseň, PHP skript uloží změnu lokálně do JSONu.
+3.  **Sync:** Okamžitě po uložení PHP zavolá Google Apps Script (Webhook).
+4.  **Merge:** Google Script porovná data, aktualizuje Tabulku a případné změny z Tabulky pošle zpět na web (do souboru `api_receive_sync.php`).
 
-Klikněte na Nasazení (Deploy) > Nové nasazení.
+-----
 
-Vyberte typ Webová aplikace.
+## 📱 Použité technologie
 
-Nastavte:
+  * **Frontend:** HTML5, CSS3 (Moderní Grid/Flexbox), Vanilla JavaScript.
+  * **Backend:** PHP (zpracování API požadavků).
+  * **Database:** JSON soubor (NoSQL přístup).
+  * **Vizualizace:** Chart.js (pro grafy statistik).
+  * **Cloud:** Google Apps Script & Google Sheets.
 
-Spustit jako: Já (Me)
+-----
 
-Kdo má přístup: Kdokoliv (Anyone)
+## ⚠️ Řešení problémů
 
-Zkopírujte vygenerovanou URL a vložte ji do config.php na vašem webu.
+  * **Data se neukládají:** Zkontrolujte přes FTP, zda má složka `data/` nastavená práva **777** (zápis povolen pro všechny).
+  * **Chyba synchronizace:** Ověřte, že v `config.php` je správná URL a že Google Script je nasazen s právy přístupu pro **"Anyone" (Kdokoliv)**.
+  * **Duplicity v historii:** Ujistěte se, že používáte nejnovější verzi souborů `api_local.php` a `script.js`, které obsahují opravy pro kontrolu duplicitních dat.
 
-💡 Jak to funguje
+-----
 
-Čtení: Aplikace čte data primárně z data/songs.json, což je velmi rychlé.
-
-Zápis: Když upravíte píseň, PHP ji uloží do JSONu.
-
-Sync: PHP ihned zavolá Google Apps Script. Ten si stáhne nový JSON, porovná ho s Tabulkou a sjednotí data (merge). Výsledek pošle zpět na web.
-
-Díky tomu máte rychlý web a zároveň robustní zálohu v Excelu.
-
-📱 Použité technologie
-
-Frontend: HTML5, CSS3 (Grid/Flexbox), JavaScript (Vanilla).
-
-Backend: PHP.
-
-Data: JSON soubor.
-
-Knihovny: Chart.js (grafy).
-
-Cloud: Google Apps Script (synchronizace).
-
-⚠️ Řešení problémů
-
-Data se neukládají: Zkontrolujte, zda má složka data/ a soubor songs.json oprávnění pro zápis (CHMOD 777 nebo 7
+Made with ❤️ for worship teams.
