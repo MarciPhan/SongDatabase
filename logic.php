@@ -4,10 +4,8 @@
 /* ========================================= */
 
 // --- AUTOMATICKÉ VERZOVÁNÍ ---
-// Hash se změní pokaždé, když uložíš tento soubor.
 $lastMod = filemtime(__FILE__); 
-// Přidali jsme suffix "-fix", aby prohlížeč poznal, že proběhla oprava a načetl nový script.js
-$appVersion = date("Y.m.d-Hi", $lastMod) . ""; 
+$appVersion = date("Y.m.d-Hi", $lastMod) . "-stats"; 
 
 // Načtení konfigurace
 if (file_exists("config.php")) {
@@ -49,13 +47,21 @@ foreach ($songsData as $s) {
     $totalPlays += (int)($s["count"] ?? 0);
 }
 
-// Seřazení
+// Seřazení filtrů
 sort($categories);
 sort($tags);
 sort($tempos);
 
-// 3. DATA PRO GRAF (Top 5)
+// 3. PŘÍPRAVA DAT PRO GRAFY (Top 20 & Flop 20)
+// Nejhranější
 $topSongs = $songsData;
 usort($topSongs, fn($a, $b) => ($b["count"] ?? 0) <=> ($a["count"] ?? 0));
-$topSongs = array_slice($topSongs, 0, 5);
+$top20 = array_slice($topSongs, 0, 20);
+
+// Nejméně hrané (Rarity)
+$flopSongs = $songsData;
+// Řadíme vzestupně podle count
+usort($flopSongs, fn($a, $b) => ($a["count"] ?? 0) <=> ($b["count"] ?? 0));
+$flop20 = array_slice($flopSongs, 0, 20);
+
 ?>
