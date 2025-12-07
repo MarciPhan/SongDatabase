@@ -43,6 +43,11 @@ require_once "logic.php";
             
             <input type="text" id="tableSearch" placeholder="Hledat..." style="flex:2; min-width:180px;">
             
+            <select id="tableTempo" style="flex:1; min-width:130px;">
+                <option value="">Všechna tempa</option>
+                <?php foreach ($tempos as $t) echo "<option>" . htmlspecialchars($t) . "</option>"; ?>
+            </select>
+
             <select id="tableCat" style="flex:1; min-width:130px;">
                 <option value="">Všechny kategorie</option>
                 <?php foreach ($categories as $c) echo "<option>" . htmlspecialchars($c) . "</option>"; ?>
@@ -60,9 +65,9 @@ require_once "logic.php";
                     <tr>
                         <th onclick="sortTable(0)">Název <span class="arrow">↕</span></th>
                         <th onclick="sortTable(1)">Kategorie <span class="arrow">↕</span></th>
-                        <th onclick="sortTable(2)">Tagy <span class="arrow">↕</span></th>
-                        <th onclick="sortTable(3)" style="text-align:center">Počet <span class="arrow">↕</span></th>
-                        <th onclick="sortTable(4)" style="text-align:right">Naposledy <span class="arrow">↕</span></th>
+                        <th onclick="sortTable(2)">Tempo <span class="arrow">↕</span></th> <th onclick="sortTable(3)">Tagy <span class="arrow">↕</span></th>
+                        <th onclick="sortTable(4)" style="text-align:center">Počet <span class="arrow">↕</span></th>
+                        <th onclick="sortTable(5)" style="text-align:right">Naposledy <span class="arrow">↕</span></th>
                         <th></th>
                     </tr>
                 </thead>
@@ -71,7 +76,6 @@ require_once "logic.php";
                     $last = $s["last"] ?? "";
                     if (isset($s["history"]) && is_array($s["history"]) && count($s["history"]) > 0) $last = $s["history"][0];
                     
-                    // Výpočet dní
                     $daysDiff = 99999;
                     if($last) {
                         $daysDiff = floor((time() - strtotime($last)) / 86400);
@@ -86,6 +90,9 @@ require_once "logic.php";
                         <div style="font-size:12px; color:#888;"><?= htmlspecialchars($s["author"]) ?></div>
                     </td>
                     <td><span style="background:#f0f0f0; padding:3px 7px; border-radius:5px; font-size:12px;"><?= htmlspecialchars($s["category"]) ?></span></td>
+                    
+                    <td style="font-size:13px; color:#555;"><?= htmlspecialchars($s["tempo"] ?? "") ?></td>
+
                     <td>
                         <?php 
                         if(!empty($s["tags"])) {
@@ -248,7 +255,6 @@ require_once "logic.php";
 <div id="toast">Zpráva</div>
 
 <script>
-    // Předáváme data do JS (Top 20 a Flop 20)
     window.serverData = {
         songs: <?= json_encode($songsData) ?>,
         stats: {
