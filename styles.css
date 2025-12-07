@@ -1,302 +1,205 @@
-/* ========== RESET & BASE ========== */
+/* ========================================= */
+/* 1. RESET & BASE                           */
+/* ========================================= */
 *,*::before,*::after{box-sizing:border-box}
 *{margin:0;padding:0}
 html{-webkit-text-size-adjust:100%;-moz-text-size-adjust:100%}
-:root{ --sab: env(safe-area-inset-bottom, 0px); }
-
-/* Optional: zajistí plnou šířku i v některých obalech (Apps Script preview) */
-html,body{width:100%;max-width:100%}
-@media (max-width:900px){
-  html,body{min-width:0}
-  body>div, body>div *{min-width:0;max-width:100%}
-}
 
 body{
   background:#f5f5f7;
   color:#1d1d1f;
-  font:18px/1.5 -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Arial,sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   min-height:100vh;
-  overflow-x:hidden;
-  padding-bottom:100px;
+  padding-bottom:50px;
+  line-height: 1.4; /* Kompaktnější řádkování */
 }
 
-/* ========== HEADER ========== */
+/* HEADER */
 .site-header{
-  background:#d11a2a;color:#fff;
-  padding:20px;
-  box-shadow:0 2px 8px rgba(0,0,0,.1)
+  background:#d11a2a; color:#fff;
+  padding:15px 20px; /* Menší padding */
+  box-shadow:0 2px 8px rgba(0,0,0,.1);
+  margin-bottom: 20px;
 }
-.site-header .title{font-weight:700;font-size:24px;text-align:center}
+.site-header .title{font-weight:700;font-size:22px;text-align:center}
 
-/* ========== CONTAINER ========== */
-.wrap{width:100%;max-width:100%;padding:0}
+/* CONTAINER */
+.wrap{width:100%;max-width:1100px;margin:0 auto;padding:0 15px;}
 
-/* ========== CARD ========== */
-.card{
+/* ========================================= */
+/* 2. LAYOUT & CARDS                         */
+/* ========================================= */
+.dashboard-grid { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 15px; 
+    margin-bottom: 20px; 
+}
+@media (max-width: 800px) { .dashboard-grid { grid-template-columns: 1fr; } }
+
+.card {
   background:#fff;
-  padding:24px 20px;
-  margin-bottom:0;
-  border-bottom:8px solid #f5f5f7
+  border-radius:16px; /* Jemnější radius */
+  padding:20px; /* Menší padding */
+  border:1px solid #e5e5e7;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+  margin-bottom: 15px;
 }
 
-/* ========== TYPOGRAPHY ========== */
-.h3{font-size:26px;font-weight:700;margin:0 0 20px;color:#1d1d1f}
-
-/* ========== CURRENCY SWITCH ========== */
-.currency-section{
-  display:flex;justify-content:space-between;align-items:center;
-  margin-bottom:20px;gap:16px
-}
-.switch{
-  display:inline-flex;position:relative;border:2px solid #d11a2a;border-radius:14px;
-  background:#fff;padding:4px;height:52px;min-width:160px
-}
-.switch input{position:absolute;opacity:0;pointer-events:none}
-.switch label{
-  position:relative;z-index:2;flex:1;padding:0 24px;text-align:center;cursor:pointer;
-  user-select:none;font-weight:600;font-size:17px;color:#6b6b6b;
-  display:flex;align-items:center;justify-content:center;transition:color .2s;border-radius:10px
-}
-.switch .slider{
-  position:absolute;top:4px;bottom:4px;width:calc(50% - 4px);left:4px;background:#d11a2a;
-  border-radius:10px;transition:left .3s cubic-bezier(0.4,0,0.2,1);box-shadow:0 2px 4px rgba(0,0,0,.15)
-}
-.switch input#curEUR:checked ~ .slider{left:calc(50%)}
-.switch input#curCZK:checked + label,
-.switch input#curEUR:checked ~ label[for="curEUR"]{color:#fff}
-
-/* ========== PRICE LIST ========== */
-.price-list{margin-top:16px;padding:20px;background:#f9f9f9;border-radius:14px;display:none}
-.price-list.show{display:block}
-.price-list ul{list-style:none;padding:0}
-.price-list li{padding:10px 0;font-size:17px;color:#1d1d1f}
-.price-list li b{font-weight:700}
-.price-list ul ul{margin:10px 0 0 20px}
-.price-list ul ul li{
-  font-size:16px;color:#6b6b6b;padding:6px 0 6px 16px;position:relative
-}
-.price-list ul ul li:before{
-  content:"•";position:absolute;left:0;color:#d11a2a;font-size:20px
+.panel-title { 
+    font-size: 18px; font-weight: 700; margin-bottom: 15px; 
+    color: #1d1d1f; border-bottom: 1px solid #f0f0f0; padding-bottom: 10px; 
 }
 
-/* ========== FORM CONTROLS ========== */
-.form-group{margin-bottom:24px}
-.form-label{display:block;color:#6b6b6b;font-size:16px;font-weight:600;margin-bottom:10px}
-input:not([type="checkbox"]):not([type="radio"]),select,textarea{
-  width:100%;border:2px solid #d2d2d7;border-radius:14px;padding:18px 20px;
-  font-size:19px;line-height:1.4;outline:none;background:#fff;transition:all .2s;
-  -webkit-appearance:none;appearance:none
-}
-input:focus,textarea:focus{border-color:#d11a2a;box-shadow:0 0 0 4px rgba(209,26,42,.08)}
-.field-msg{color:#ff3b30;font-size:15px;margin-top:8px;min-height:20px;font-weight:500}
+/* ========================================= */
+/* 3. BUTTONS                                */
+/* ========================================= */
+.action-btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 
-/* ========== CONSENT CHECKBOX ========== */
-.consent-box{margin-top:24px}
-.consent-label{
-  display:flex;align-items:flex-start;gap:14px;cursor:pointer;padding:20px;
-  background:#f9f9f9;border-radius:14px;border:2px solid transparent;transition:all .2s
+.big-btn {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 15px; 
+    background: #f9f9f9; 
+    border: 1px solid #e0e0e0; border-radius: 12px;
+    font-weight: 600; color: #333; cursor: pointer; 
+    transition: all 0.2s; text-align: center;
+    min-height: 90px;
 }
-.consent-label:active{background:#f0f0f0}
-.consent-label input{position:absolute;opacity:0;pointer-events:none}
-.consent-box-icon{
-  width:28px;height:28px;border:2px solid #d2d2d7;border-radius:8px;position:relative;flex-shrink:0;
-  transition:all .2s;margin-top:2px
+.big-btn span { font-size: 24px; margin-bottom: 5px; display: block; }
+.big-btn:hover { 
+    border-color: #d11a2a; color: #d11a2a; background: #fff; transform: translateY(-1px);
 }
-.consent-label input:checked ~ .consent-box-icon{border-color:#d11a2a;background:#d11a2a}
-.consent-label input:checked ~ .consent-box-icon::after{
-  content:"";position:absolute;left:8px;top:4px;width:6px;height:12px;border:solid #fff;
-  border-width:0 3px 3px 0;transform:rotate(45deg)
-}
-.consent-text{font-size:16px;color:#1d1d1f;line-height:1.5}
-.consent-text a{color:#d11a2a;text-decoration:none;font-weight:600}
+.big-btn.primary { background: #d11a2a; color: #fff; border-color: #d11a2a; }
+.big-btn.primary:hover { background: #b81624; }
 
-/* ========== BUTTONS ========== */
-.btn{
-  display:block;width:100%;border:none;background:#d11a2a;color:#fff;border-radius:14px;
-  padding:20px;font-size:19px;font-weight:600;cursor:pointer;transition:all .2s;
-  -webkit-tap-highlight-color:transparent;text-align:center
+.btn {
+  display:block; width:100%; border:none; background:#d11a2a; color:#fff; border-radius:10px;
+  padding:12px; font-size:15px; font-weight:600; cursor:pointer; transition:all .2s; text-align:center;
 }
-.btn:active:not(:disabled){transform:scale(0.98);background:#b81624}
-.btn:disabled{opacity:.5;cursor:not-allowed}
-.btn-secondary{background:#f5f5f7;color:#1d1d1f;border:2px solid #d2d2d7}
-.btn-secondary:active:not(:disabled){background:#e5e5e7}
-.btn-add{margin-bottom:24px}
+.btn:hover { background: #b81624; }
+.btn-secondary { background: #f5f5f7; color: #333; border: 1px solid #d2d2d7; }
+.btn-secondary:hover { background: #e5e5e7; }
+.btn-danger { background: #fff; color: #d11a2a; border: 1px solid #d11a2a; }
 
-/* ========== PERSON CARD ========== */
-.person{
-  background:#fff;border:2px solid #e5e5e7;border-radius:18px;padding:20px;margin-bottom:20px
+/* ========================================= */
+/* 4. FORMS & INPUTS                         */
+/* ========================================= */
+.form-group { margin-bottom: 15px; }
+.form-label { display: block; color: #333; font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+
+input, select {
+  width:100%; border:1px solid #d2d2d7; border-radius:10px; padding:10px 12px;
+  font-size:15px; outline:none; background:#fff; transition:border-color .2s;
+  appearance: none; -webkit-appearance: none;
 }
-.person-header{
-  display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;
-  padding-bottom:16px;border-bottom:2px solid #f0f0f0
+select {
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat; background-position: right 12px top 50%; background-size: 10px auto; padding-right: 35px; cursor: pointer;
 }
-.person-number{font-size:22px;font-weight:700;color:#d11a2a}
-.btn-remove{
-  background:transparent;color:#ff3b30;border:2px solid #ff3b30;padding:10px 20px;
-  font-size:16px;border-radius:10px;width:auto
+input:focus, select:focus { border-color: #d11a2a; }
+
+/* TABULKA (Kompaktnější) */
+.table-wrapper { overflow-x: auto; border: 1px solid #e5e5e7; border-radius: 12px; margin-top: 15px; }
+table { width: 100%; border-collapse: collapse; background: #fff; min-width: 650px; }
+th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #f0f0f0; font-size: 14px; vertical-align: middle; }
+th { background: #fcfcfc; font-weight: 600; color: #555; cursor: pointer; white-space: nowrap; user-select: none; border-bottom: 2px solid #eee; }
+th:hover { color: #d11a2a; background: #f5f5f5; }
+.row-red { background: #fff5f5; }
+
+/* Tagy */
+.tag-badge {
+    display: inline-block; background: #eef1f5; color: #555;
+    padding: 2px 6px; border-radius: 4px; font-size: 11px; margin-right: 4px; border: 1px solid #ddd;
 }
 
-/* ========== ADDONS ========== */
-.addons-grid{display:grid;gap:14px;margin:24px 0}
-.addon-item{
-  display:flex;align-items:center;gap:14px;padding:18px;background:#f9f9f9;border-radius:14px;
-  cursor:pointer;border:2px solid transparent;transition:all .2s
-}
-.addon-item:active{background:#f0f0f0}
-.addon-item input{position:absolute;opacity:0;pointer-events:none}
-.addon-checkbox{
-  width:28px;height:28px;border:2px solid #d2d2d7;border-radius:8px;position:relative;flex-shrink:0;transition:all .2s
-}
-.addon-item input:checked ~ .addon-checkbox{border-color:#d11a2a;background:#d11a2a}
-.addon-item input:checked ~ .addon-checkbox::after{
-  content:"";position:absolute;left:8px;top:4px;width:6px;height:12px;border:solid #fff;
-  border-width:0 3px 3px 0;transform:rotate(45deg)
-}
-.addon-content{flex:1;display:flex;justify-content:space-between;align-items:center}
-.addon-name{font-size:17px;color:#1d1d1f;font-weight:500}
-.addon-price{font-size:16px;color:#6b6b6b;font-weight:600}
-
-/* ========== SPORTS ========== */
-.sports-section{margin:24px 0}
-.sports-label{display:block;color:#6b6b6b;font-size:16px;font-weight:600;margin-bottom:14px}
-.sports-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-.sport-chip{position:relative;cursor:pointer}
-.sport-chip input{position:absolute;opacity:0;pointer-events:none}
-.sport-chip-label{
-  display:flex;align-items:center;justify-content:center;padding:16px 10px;background:#fff;
-  border:2px solid #d2d2d7;border-radius:14px;font-size:16px;font-weight:500;color:#1d1d1f;
-  transition:all .2s;text-align:center;min-height:56px
-}
-.sport-chip input:checked ~ .sport-chip-label{border-color:#d11a2a;background:#fff0f1;color:#d11a2a;font-weight:700}
-.sport-tooltip{position:relative}
-.sport-info{
-  position:absolute;bottom:calc(100% + 10px);left:50%;transform:translateX(-50%);
-  background:#1d1d1f;color:#fff;padding:12px 14px;border-radius:10px;font-size:14px;line-height:1.4;
-  display:none;max-width:260px;z-index:50;white-space:normal;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,.3)
-}
-.sport-tooltip:active .sport-info{display:block}
-
-/* ========== SUMMARY (FIXED) ========== */
-.summary{
-  background:#f9f9f9;border-radius:14px;padding:20px;margin:24px 0
-}
-.summary-row{display:flex;justify-content:space-between;padding:12px 0;font-size:17px}
-.summary-row:not(:last-child){border-bottom:2px solid #e5e5e7}
-.summary-row:last-child{font-size:20px;font-weight:700;color:#d11a2a;padding-top:20px}
-.summary-label{color:#6b6b6b}
-.summary-value{font-weight:600;color:#1d1d1f}
-.summary-row:last-child .summary-value{color:#d11a2a}
-
-/* ========== STICKY BOTTOM ========== */
-.sticky-bottom{
-  position:fixed;bottom:0;left:0;right:0;background:#fff;padding:16px 20px calc(16px + var(--sab));
-  box-shadow:0 -2px 16px rgba(0,0,0,.12);z-index:90;border-top:2px solid #e5e5e7
-}
-.action-buttons{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.send-msg{text-align:center;font-size:16px;color:#6b6b6b;margin-top:10px;min-height:22px}
-
-/* ========== MODAL ========== */
+/* ========================================= */
+/* 5. MODALS                                 */
+/* ========================================= */
 .modal {
-  display: none; /* Skryto defaultně (JS přepíná na flex) */
-  position: fixed;
-  z-index: 1000;
-  left: 0; top: 0;
-  width: 100%; height: 100%;
-  background-color: rgba(0,0,0,0.6);
-  backdrop-filter: blur(3px);
-  /* Flexbox pro perfektní centrování */
-  align-items: center;
-  justify-content: center;
+  display: none; position: fixed; z-index: 9999;
+  left: 0; top: 0; width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.5); backdrop-filter: blur(4px);
+  align-items: center; justify-content: center; padding: 15px;
 }
-
 .modal-content {
-  background: #fff;
-  width: 90%;
-  max-width: 550px;
-  max-height: 85vh; /* Nepřesáhne 85% výšky okna */
-  border-radius: 16px;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.4);
-  position: relative;
-  
-  /* Flexbox pro vnitřní rozložení (Hlavička - Tělo - Patička) */
-  display: flex;
-  flex-direction: column;
-  overflow: hidden; /* Důležité pro oříznutí rohů */
+  background: #fff; width: 100%; max-width: 480px; max-height: 90vh;
+  border-radius: 16px; box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+  display: flex; flex-direction: column; overflow: hidden;
+  animation: modalFadeIn 0.25s ease-out;
 }
+.modal-content.large { max-width: 650px; }
+@keyframes modalFadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
 
-/* Hlavička modalu */
-.modal-header {
-  padding: 20px;
-  border-bottom: 1px solid #eee;
-  background: #fff;
-  flex-shrink: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.modal-title {
-  font-size: 22px;
-  font-weight: 700;
-  color: #d11a2a;
-  margin: 0;
-}
-
-.close-btn { 
-  font-size: 28px; color: #888; font-weight: bold; cursor: pointer; line-height: 1;
-}
+.modal-header { padding: 15px 20px; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; background: #fff; }
+.modal-title { font-size: 18px; font-weight: 700; color: #333; margin:0; }
+.close-btn { font-size: 24px; color: #bbb; cursor: pointer; line-height: 1; transition: color 0.2s; }
 .close-btn:hover { color: #d11a2a; }
+.modal-body { padding: 20px; overflow-y: auto; }
+/* Footer je volitelný, některé modaly ho nemají */
+.modal-footer { padding: 15px 20px; background: #fcfcfc; text-align: right; border-top: 1px solid #f0f0f0; }
 
-/* Tělo modalu (skrolovací) */
-.modal-body {
-  padding: 0 20px;
-  overflow-y: auto; /* Zde se zapne skrolování */
-  flex-grow: 1;
-}
+/* ========================================= */
+/* 6. STATS & HISTORY STYLE FIXES            */
+/* ========================================= */
 
-/* Patička modalu */
-.modal-footer {
-  padding: 20px;
-  border-top: 1px solid #eee;
-  background: #f9f9f9;
-  flex-shrink: 0;
-  display: flex;
-  gap: 10px;
-  justify-content: flex-end;
+/* Kompaktní statistiky v modalu */
+.stats-compact-row {
+    display: flex; 
+    background: #f9f9f9; 
+    border-radius: 12px; 
+    border: 1px solid #eee;
+    padding: 15px; 
+    justify-content: space-around;
+    margin-bottom: 20px;
 }
+.stat-item { text-align: center; }
+.stat-val { font-size: 24px; font-weight: 800; color: #d11a2a; display: block; line-height: 1.2; }
+.stat-lbl { font-size: 11px; text-transform: uppercase; color: #888; letter-spacing: 0.5px; }
 
-/* ========== RESPONSIVE (DESKTOP TUNING) ========== */
-:root{
-  --content-md: 720px;   /* ≥768px */
-  --content-lg: 880px;   /* ≥1200px */
-  --content-xl: 980px;   /* ≥1600px */
-  --content-2xl: 1080px; /* ≥2000px */
+/* Historie - Seznam */
+.history-list { list-style: none; padding: 0; margin: 0; }
+.history-item { 
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 0; border-bottom: 1px solid #f5f5f5; 
+    font-size: 14px;
 }
+.history-item:last-child { border-bottom: none; }
+.h-date { font-weight: 600; color: #333; width: 100px; font-family: monospace; }
+.h-name { flex: 1; color: #555; }
+.h-actions { display: flex; gap: 8px; }
+.icon-btn { 
+    border: none; background: #fff; cursor: pointer; font-size: 16px; 
+    padding: 4px; border-radius: 4px; color: #999; transition: all 0.2s; 
+}
+.icon-btn:hover { color: #d11a2a; background: #fff5f5; }
 
-@media (min-width:768px){
-  body{padding-bottom:0}
-  .wrap{max-width:var(--content-md);margin:0 auto;padding:20px}
-  .card{border-radius:16px;border:1px solid #e5e5e7;margin-bottom:16px;padding:24px}
-  .sports-grid{grid-template-columns:repeat(4,1fr)}
-  .sticky-bottom{position:static;box-shadow:none;border-top:none;background:transparent;padding:0}
+/* Zapomenuté písně */
+#neglectedContainer { max-height: 250px; overflow-y: auto; overflow-x: hidden; width: 100%; }
+.neglected-card {
+    display: flex; justify-content: space-between; align-items: center;
+    background: #fff; border-bottom: 1px solid #f0f0f0; padding: 10px 5px;
+    width: 100%; box-sizing: border-box;
 }
+.neglected-card:last-child { border-bottom: none; }
+.neglected-info b { display: block; font-size: 14px; color: #333; }
+.neglected-info small { color: #888; font-size: 12px; }
+.neglected-date { color: #d11a2a; font-weight: 600; font-size: 12px; background: #fff0f1; padding: 2px 8px; border-radius: 10px; white-space: nowrap; }
 
-@media (min-width:1200px){
-  .wrap{max-width:var(--content-lg)}
-  .card{padding:22px}
-}
+/* Chips History (Editace) */
+.history-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.history-chip { display: flex; align-items: center; gap: 6px; background: #f0f0f0; border-radius: 15px; padding: 4px 10px; font-size: 13px; color: #333; border: 1px solid #e0e0e0; }
+.chip-remove { color: #bbb; cursor: pointer; font-weight: bold; font-size: 16px; line-height: 1; }
+.chip-remove:hover { color: #d11a2a; }
 
-@media (min-width:1600px){
-  .wrap{max-width:var(--content-xl)}
-  body{font-size:17px}
-  .h3{font-size:24px}
-  input:not([type="checkbox"]):not([type="radio"]),select,textarea{font-size:17px;padding:16px 18px}
-  .btn{font-size:17px;padding:18px}
-  .card{padding:20px}
-  .summary-row{font-size:16px}
-  .summary-row:last-child{font-size:19px}
-}
+/* Dialogs */
+.ui-dialog-content { text-align: center; font-size: 16px; color: #444; margin-bottom: 20px; }
+.ui-dialog-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 
-@media (min-width:2000px){
-  .wrap{max-width:var(--content-2xl)}
-}
+/* Toast */
+#toast { visibility: hidden; min-width: 200px; background-color: #333; color: #fff; text-align: center; border-radius: 8px; padding: 12px 20px; position: fixed; z-index: 10000; left: 50%; bottom: 30px; transform: translateX(-50%); font-size: 14px; opacity: 0; transition: all 0.3s; }
+#toast.show { visibility: visible; opacity: 1; bottom: 50px; }
+#toast.error { background-color: #d11a2a; }
+
+/* Footer */
+.site-footer { text-align: center; padding: 20px; margin-top: 30px; border-top: 1px solid #f0f0f0; color: #aaa; font-size: 12px; }
+.version-hash { font-family: monospace; background: #f5f5f5; color: #888; padding: 2px 5px; border-radius: 4px; margin-left: 5px; }
