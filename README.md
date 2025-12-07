@@ -1,6 +1,6 @@
 # 🎵 Knihovna Písní pro Hudební Skupinku
 
-Jednoduchá, ale dobrá webová aplikace pro správu písní, evidenci hraní a generování playlistů pro chválové skupiny.
+Jednoduchá, ale dobrá webová aplikace pro správu písní, evidenci hraní pro chválové skupiny.
 
 Aplikace kombinuje **rychlost lokálního JSONu** s **robustností Google Tabulek**. Frontend běží na PHP a data se ukládají lokálně, zatímco na pozadí probíhá automatická synchronizace s Google Sheets, která slouží jako administrace a záloha.
 
@@ -11,7 +11,6 @@ Aplikace kombinuje **rychlost lokálního JSONu** s **robustností Google Tabule
 ### 🎸 Pro uživatele (Frontend)
 * **Seznam písní:** Přehledná tabulka s řazením a filtrováním (podle názvu, kategorie, tagů).
 * **Zápis hraní:** Jednoduchý formulář pro rychlé zaznamenání, že se píseň hrála.
-* **Generátor playlistu:** Náhodný výběr písní podle kritérií (např. rychlé chvály, nehráno X měsíců, limit počtu písní).
 * **Historie:** Detailní přehled (kalendářní i seznamový) o tom, kdy a co se hrálo.
 * **Statistiky:** Grafický přehled nejčastěji hraných písní (Top 5).
 
