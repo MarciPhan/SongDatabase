@@ -81,6 +81,3 @@ Pokud chcete zálohovat data do tabulky nebo je editovat hromadně v Excelu/Goog
 ## 📝 Licence
 
 Tento projekt je open-source. Můžete jej volně upravovat a používat pro své potřeby.
-
-```
-```
