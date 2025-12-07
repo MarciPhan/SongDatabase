@@ -22,28 +22,35 @@ $found = false;
 
 foreach ($data as &$s) {
     if ($s["name"] === $song) {
-        $s["count"]++;
         
-        // 1. Aktualizace "last" (pro rychlé třídění)
-        if (!isset($s["last"]) || $date > $s["last"]) {
-            $s["last"] = $date;
-        }
-
-        // 2. Aktualizace "history" (pole všech dat)
+        // Inicializace historie pokud chybí
         if (!isset($s["history"]) || !is_array($s["history"])) {
             $s["history"] = [];
-            // Zachování starého data, pokud existovalo
             if (isset($s["last"]) && $s["last"] && $s["last"] !== $date) {
                 $s["history"][] = $s["last"];
             }
         }
 
-        // Přidat nové datum, pokud tam ještě není
-        if (!in_array($date, $s["history"])) {
-            $s["history"][] = $date;
-            // Seřadit sestupně (nejnovější nahoře)
-            rsort($s["history"]);
+        // --- BUGFIX: KONTROLA DUPLICITY ---
+        // Pokud už historie obsahuje toto datum, zastavíme akci.
+        if (in_array($date, $s["history"])) {
+            echo json_encode(["error" => "Tato píseň už byla dnes zapsána!"]);
+            exit;
         }
+
+        // Pokud není duplicita, přidáme datum
+        $s["history"][] = $date;
+        
+        // Seřadit sestupně (nejnovější nahoře)
+        rsort($s["history"]);
+
+        // Aktualizace "last" podle prvního v historii
+        $s["last"] = $s["history"][0];
+
+        // --- BUGFIX: COUNT ---
+        // Počet se vždy rovná počtu záznamů v historii. 
+        // Tím se zabrání "rozjetí" počítadla a historie.
+        $s["count"] = count($s["history"]);
         
         $found = true;
         break;
@@ -54,11 +61,9 @@ if ($found) {
     // Uložit lokálně
     file_put_contents($LOCAL_DB, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
     
-    // Spustit synchronizaci s Google Sheets (pokud je URL v configu)
+    // Spustit synchronizaci s Google Sheets
     if (isset($API_URL) && $API_URL) {
         $syncUrl = $API_URL . "?action=sync_to_sheet";
-        
-        // Voláme asynchronně/s timeoutem, abychom nečekali na odpověď Googlu
         $ctx = stream_context_create(['http' => ['timeout' => 1]]); 
         @file_get_contents($syncUrl, false, $ctx);
     }
