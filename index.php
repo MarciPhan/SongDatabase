@@ -24,10 +24,10 @@ require_once "logic.php";
         <div class="card">
             <div class="panel-title">Menu</div>
             <div class="action-btn-grid">
-                <div class="big-btn" onclick="openStats()"><span>📊</span> Statistiky</div>
-                <div class="big-btn" onclick="renderGlobalHistory()"><span>📅</span> Historie</div>
-                <div class="big-btn" onclick="openAddModal()"><span>✨</span> Přidat</div>
-                <div class="big-btn primary" onclick="openModal('modalPlay')"><span>➕</span> Zapsat</div>
+                <div class="big-btn" onclick="openStats()"><span>📊</span> Statistiky hraní</div>
+                <div class="big-btn" onclick="renderGlobalHistory()"><span>📅</span> Historie hraní</div>
+                <div class="big-btn" onclick="openAddModal()"><span>✨</span> Přidat píseň</div>
+                <div class="big-btn primary" onclick="openModal('modalPlay')"><span>➕</span> Zapsat hraní</div>
             </div>
         </div>
     </div>
@@ -222,13 +222,13 @@ require_once "logic.php";
             
             <div class="charts-container">
                 <div class="chart-box">
-                    <h3 style="text-align:center; color:#d11a2a; margin-bottom:10px;">🔥 Síň slávy (Top 20)</h3>
+                    <h3 style="text-align:center; color:#d11a2a; margin-bottom:10px;">Nejhranější TOP 20</h3>
                     <div style="height: 400px; position: relative;">
                         <canvas id="topChart"></canvas>
                     </div>
                 </div>
                 <div class="chart-box">
-                    <h3 style="text-align:center; color:#555; margin-bottom:10px;">💎 Podzemí (Rarity 20)</h3>
+                    <h3 style="text-align:center; color:#555; margin-bottom:10px;">Nejméně hrané TOP 20</h3>
                     <div style="height: 400px; position: relative;">
                         <canvas id="flopChart"></canvas>
                     </div>
