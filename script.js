@@ -1,5 +1,6 @@
 /* SOUBOR: script.js */
 
+// Načtení dat z PHP (window.serverData definováno v index.php)
 const songsDB = window.serverData.songs;
 let currentEditingSong = null;
 
@@ -7,7 +8,10 @@ let currentEditingSong = null;
 let chartInstanceTop = null;
 let chartInstanceFlop = null;
 
-// UI UTILS
+// ==========================================
+// 1. UI POMOCNÉ FUNKCE (Toast, Confirm, Prompt)
+// ==========================================
+
 function showToast(msg, isError = false) {
     const t = document.getElementById("toast");
     t.innerText = msg;
@@ -22,8 +26,11 @@ function uiConfirm(text, title="Potvrzení") {
         document.getElementById('uiConfirmText').innerText = text;
         const yesBtn = document.getElementById('uiConfirmYes');
         const noBtn = document.getElementById('uiConfirmNo');
+        
+        // Klonování pro odstranění starých listenerů
         yesBtn.replaceWith(yesBtn.cloneNode(true));
         noBtn.replaceWith(noBtn.cloneNode(true));
+        
         document.getElementById('uiConfirmYes').onclick = () => { modal.style.display = 'none'; resolve(true); };
         document.getElementById('uiConfirmNo').onclick = () => { modal.style.display = 'none'; resolve(false); };
         modal.style.display = "flex";
@@ -37,23 +44,37 @@ function uiPrompt(text, defaultValue = "", title="Vstup") {
         document.getElementById('uiPromptTitle').innerText = title;
         document.getElementById('uiPromptText').innerText = text;
         input.value = defaultValue;
+        
         const okBtn = document.getElementById('uiPromptOk');
         const cancelBtn = document.getElementById('uiPromptCancel');
+        
         okBtn.replaceWith(okBtn.cloneNode(true));
         cancelBtn.replaceWith(cancelBtn.cloneNode(true));
+        
         document.getElementById('uiPromptOk').onclick = () => { modal.style.display = 'none'; resolve(input.value); };
         document.getElementById('uiPromptCancel').onclick = () => { modal.style.display = 'none'; resolve(null); };
+        
         modal.style.display = "flex";
         input.focus();
     });
 }
 
-// MODAL LOGIC
+// ==========================================
+// 2. MODAL LOGIC (Otevírání/Zavírání)
+// ==========================================
+
 function openModal(id) { document.getElementById(id).style.display = "flex"; }
 function closeModal(id) { document.getElementById(id).style.display = "none"; }
-window.onclick = function(e) { if(e.target.classList.contains('modal')) e.target.style.display="none"; }
 
-// --- STATISTIKY (NOVÉ - HUDEBNÍ SPEKTRUM) ---
+// Zavření modalu kliknutím na pozadí
+window.onclick = function(e) { 
+    if(e.target.classList.contains('modal')) e.target.style.display="none"; 
+}
+
+// ==========================================
+// 3. STATISTIKY (HUDEBNÍ SPEKTRUM)
+// ==========================================
+
 function openStats() {
     openModal('modalStats');
     
@@ -61,9 +82,10 @@ function openStats() {
     if (chartInstanceTop) chartInstanceTop.destroy();
     if (chartInstanceFlop) chartInstanceFlop.destroy();
 
+    // Data připravená v PHP
     const statsData = window.serverData.stats;
 
-    // 1. Graf TOP 20
+    // 1. Graf TOP 20 (Nejhranější)
     const ctxTop = document.getElementById('topChart').getContext('2d');
     chartInstanceTop = new Chart(ctxTop, {
         type: 'bar',
@@ -112,14 +134,20 @@ function openStats() {
     });
 }
 
-// --- SPRÁVA PÍSNĚ ---
+// ==========================================
+// 4. SPRÁVA PÍSNĚ (ADD / EDIT / DELETE)
+// ==========================================
+
 function openAddModal() {
     currentEditingSong = null;
     document.getElementById('manageTitle').innerText = "✨ Přidat píseň";
     document.getElementById('manageAction').value = "add";
     document.getElementById('manageForm').reset();
+    
+    // Skrytí prvků, které jsou jen pro editaci
     document.getElementById('btnDelete').style.display = "none";
     document.getElementById('editHistorySection').style.display = "none";
+    
     openModal('modalManage');
 }
 
@@ -129,12 +157,14 @@ function openEditModal(song) {
     document.getElementById('manageAction').value = "edit";
     document.getElementById('manageOriginalName').value = song.name;
     
+    // Vyplnění formuláře
     document.getElementById('inpName').value = song.name;
     document.getElementById('inpAuthor').value = song.author;
     document.getElementById('inpCategory').value = song.category;
-    document.getElementById('inpTempo').value = song.tempo;
+    document.getElementById('inpTempo').value = song.tempo; // Vyplnění tempa
     document.getElementById('inpTags').value = song.tags;
     
+    // Zobrazení prvků pro editaci
     document.getElementById('btnDelete').style.display = "block";
     document.getElementById('editHistorySection').style.display = "block";
     
@@ -142,85 +172,136 @@ function openEditModal(song) {
     openModal('modalManage');
 }
 
+// Odeslání formuláře (Přidat / Upravit)
 document.getElementById('manageForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const btn = document.getElementById('btnManageSave');
     const formData = new FormData(this);
-    btn.disabled = true; btn.innerText = "Ukládám...";
     
-    fetch('api_manage_song.php', { method: 'POST', body: formData }).then(r=>r.json()).then(res => {
-        if(res.ok) location.reload();
-        else { showToast(res.error, true); btn.disabled=false; btn.innerText="Uložit"; }
-    }).catch(err => { showToast("Chyba sítě", true); btn.disabled=false; });
+    btn.disabled = true; 
+    btn.innerText = "Ukládám...";
+    
+    fetch('api_manage_song.php', { method: 'POST', body: formData })
+        .then(r => r.json())
+        .then(res => {
+            if(res.ok) location.reload();
+            else { 
+                showToast(res.error, true); 
+                btn.disabled = false; 
+                btn.innerText = "Uložit"; 
+            }
+        })
+        .catch(err => { 
+            showToast("Chyba sítě", true); 
+            btn.disabled = false; 
+        });
 });
 
+// Smazání písně
 async function deleteSong() {
-    if(! await uiConfirm("Opravdu smazat?", "Smazání")) return;
+    if(! await uiConfirm("Opravdu smazat tuto píseň?", "Smazání")) return;
+    
     const formData = new FormData();
     formData.append('action', 'delete');
     formData.append('original_name', document.getElementById('manageOriginalName').value);
     
-    fetch('api_manage_song.php', { method: 'POST', body: formData }).then(r=>r.json()).then(res => {
-        if(res.ok) location.reload();
-        else showToast(res.error, true);
-    });
+    fetch('api_manage_song.php', { method: 'POST', body: formData })
+        .then(r => r.json())
+        .then(res => {
+            if(res.ok) location.reload();
+            else showToast(res.error, true);
+        });
 }
 
-// --- HISTORIE ---
+// ==========================================
+// 5. HISTORIE (V EDITACI PÍSNĚ)
+// ==========================================
+
 function renderEditHistory(history) {
     const container = document.getElementById('historyChips');
     container.innerHTML = "";
-    if(!history || history.length === 0) { container.innerHTML = "<i style='color:#999;font-size:13px;'>Žádná historie</i>"; return; }
+    
+    if(!history || history.length === 0) { 
+        container.innerHTML = "<i style='color:#999;font-size:13px;'>Žádná historie</i>"; 
+        return; 
+    }
+    
+    // Seřadit sestupně
     history.sort((a,b) => new Date(b) - new Date(a));
+    
     history.forEach(date => {
         const d = new Date(date).toLocaleDateString('cs-CZ');
         const chip = document.createElement('div');
         chip.className = "history-chip";
-        chip.innerHTML = `<span class="chip-date" onclick="editHistoryDate('${date}')" title="Upravit">${d}</span>
-                          <span class="chip-remove" onclick="removeHistoryDate('${date}')" title="Smazat">&times;</span>`;
+        chip.innerHTML = `
+            <span class="chip-date" onclick="editHistoryDate('${date}')" title="Upravit">${d}</span>
+            <span class="chip-remove" onclick="removeHistoryDate('${date}')" title="Smazat">&times;</span>
+        `;
         container.appendChild(chip);
     });
 }
+
 function addHistoryDate() {
     const date = document.getElementById('newHistoryDate').value;
     if(!date) return showToast("Vyber datum!", true);
     callHistoryApi('add', date);
     document.getElementById('newHistoryDate').value = "";
 }
+
 async function removeHistoryDate(date) {
     if(await uiConfirm("Smazat datum " + date + "?")) callHistoryApi('remove', date);
 }
+
 async function editHistoryDate(oldDate) {
-    const newDate = await uiPrompt("Nové datum (YYYY-MM-DD):", oldDate, "Upravit");
+    const newDate = await uiPrompt("Nové datum (YYYY-MM-DD):", oldDate, "Upravit historii");
     if(newDate && newDate !== oldDate) {
         callHistoryApi('update', newDate, true, oldDate); 
     }
 }
+
+// Volání API pro historii (lokální update jedné písně)
 function callHistoryApi(action, date, reload = true, oldDate = null) {
     const formData = new FormData();
     formData.append('song', currentEditingSong.name);
     formData.append('action', action);
     formData.append('date', date);
     if(oldDate) formData.append('old_date', oldDate);
-    fetch('api_manage_history.php', { method: 'POST', body: formData }).then(r=>r.json()).then(res => {
-        if(res.ok) {
-            currentEditingSong = res.song;
-            showToast("Uloženo");
-            if(reload) setTimeout(() => location.reload(), 300);
-        } else showToast("Chyba: " + res.error, true);
-    });
+    
+    fetch('api_manage_history.php', { method: 'POST', body: formData })
+        .then(r => r.json())
+        .then(res => {
+            if(res.ok) {
+                currentEditingSong = res.song;
+                showToast("Uloženo");
+                if(reload) setTimeout(() => location.reload(), 300);
+            } else showToast("Chyba: " + res.error, true);
+        });
 }
 
-// --- ZÁPIS HRANÍ ---
+// ==========================================
+// 6. ZÁPIS HRANÍ (NAŠEPTÁVAČ)
+// ==========================================
+
 const searchInput = document.getElementById('songSearchInput');
 const suggestionsBox = document.getElementById('suggestionsBox');
+
 if(searchInput) {
     searchInput.addEventListener('input', function() {
         const val = this.value.toLowerCase();
-        document.getElementById('songHiddenInput').value = "";
-        if(val.length < 2) { suggestionsBox.style.display = 'none'; return; }
-        const matches = songsDB.filter(s => s.name.toLowerCase().includes(val) || s.author.toLowerCase().includes(val)).slice(0, 10);
+        document.getElementById('songHiddenInput').value = ""; // Reset hidden ID
+        
+        if(val.length < 2) { 
+            suggestionsBox.style.display = 'none'; 
+            return; 
+        }
+        
+        const matches = songsDB.filter(s => 
+            s.name.toLowerCase().includes(val) || 
+            (s.author && s.author.toLowerCase().includes(val))
+        ).slice(0, 10);
+        
         suggestionsBox.innerHTML = '';
+        
         if(matches.length > 0) {
             suggestionsBox.style.display = 'block';
             matches.forEach(s => {
@@ -240,6 +321,7 @@ if(searchInput) {
     });
 }
 
+// Odeslání formuláře Zapsat
 document.getElementById('playForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const btn = document.getElementById('btnSavePlay');
@@ -248,8 +330,9 @@ document.getElementById('playForm').addEventListener('submit', function(e) {
     const songName = formData.get('song');
     const dateVal = formData.get('date');
 
-    if(!songName) return showToast("Vyber píseň!", true);
+    if(!songName) return showToast("Vyber píseň ze seznamu!", true);
 
+    // Kontrola duplicity pro dnešní den
     const foundSong = songsDB.find(s => s.name === songName);
     if (foundSong) {
         let history = foundSong.history || [];
@@ -260,17 +343,30 @@ document.getElementById('playForm').addEventListener('submit', function(e) {
         }
     }
 
-    btn.disabled = true; btn.innerText = "Ukládám...";
-    fetch('api_local.php', { method: 'POST', body: formData }).then(r=>r.json()).then(res => {
-        if(res.ok) location.reload();
-        else { showToast("Chyba: " + res.error, true); btn.disabled=false; btn.innerText="Uložit"; }
-    });
+    btn.disabled = true; 
+    btn.innerText = "Ukládám...";
+    
+    fetch('api_local.php', { method: 'POST', body: formData })
+        .then(r => r.json())
+        .then(res => {
+            if(res.ok) location.reload();
+            else { 
+                showToast("Chyba: " + res.error, true); 
+                btn.disabled = false; 
+                btn.innerText = "Uložit"; 
+            }
+        });
 });
 
-// --- GLOBÁLNÍ HISTORIE ---
+// ==========================================
+// 7. GLOBÁLNÍ HISTORIE (VŠECHNY PÍSNĚ)
+// ==========================================
+
 function renderGlobalHistory() {
     const container = document.getElementById('globalHistoryContainer');
     let all = [];
+    
+    // Sesbírání všech záznamů
     songsDB.forEach(s => {
         if(s.history && s.history.length > 0) {
             s.history.forEach(d => all.push({date: d, name: s.name}));
@@ -278,50 +374,64 @@ function renderGlobalHistory() {
             all.push({date: s.last, name: s.name});
         }
     });
+    
+    // Řazení podle data (nejnovější nahoře)
     all.sort((a,b) => new Date(b.date) - new Date(a.date));
+    
     let html = "<ul class='history-list'>";
-    all.slice(0, 100).forEach(item => { 
+    all.slice(0, 100).forEach(item => { // Limit 100 záznamů
         const d = new Date(item.date).toLocaleDateString('cs-CZ');
-        html += `<li class="history-item">
-                    <div class="h-date">${d}</div>
-                    <div class="h-name">${item.name}</div>
-                    <div class="h-actions">
-                        <button class="icon-btn" onclick="editHistoryItem('${item.name}', '${item.date}')" title="Upravit">✏️</button>
-                        <button class="icon-btn" onclick="deleteHistoryItem('${item.name}', '${item.date}')" title="Smazat" style="color:#ff4d4d">&times;</button>
-                    </div>
-                 </li>`;
+        html += `
+            <li class="history-item">
+                <div class="h-date">${d}</div>
+                <div class="h-name">${item.name}</div>
+                <div class="h-actions">
+                    <button class="icon-btn" onclick="editHistoryItem('${item.name}', '${item.date}')" title="Upravit">✏️</button>
+                    <button class="icon-btn" onclick="deleteHistoryItem('${item.name}', '${item.date}')" title="Smazat" style="color:#ff4d4d">&times;</button>
+                </div>
+            </li>`;
     });
     html += "</ul>";
-    container.innerHTML = html || "<p style='text-align:center;color:#999;margin-top:20px;'>Prázdné.</p>";
+    
+    container.innerHTML = html || "<p style='text-align:center;color:#999;margin-top:20px;'>Zatím prázdné.</p>";
     openModal('modalHistory');
 }
+
 async function editHistoryItem(songName, oldDate) {
-    const newDate = await uiPrompt("Nové datum (YYYY-MM-DD):", oldDate, "Oprava");
+    const newDate = await uiPrompt("Nové datum (YYYY-MM-DD):", oldDate, "Oprava záznamu");
     if(newDate && newDate !== oldDate) {
         callHistoryApiGlobal(songName, 'update', newDate, oldDate); 
     }
 }
+
 async function deleteHistoryItem(songName, date) {
     if(await uiConfirm("Smazat záznam " + songName + " (" + date + ")?")) {
         callHistoryApiGlobal(songName, 'remove', date);
     }
 }
+
 function callHistoryApiGlobal(songName, action, date, oldDate = null) {
     const formData = new FormData();
     formData.append('song', songName);
     formData.append('action', action);
     formData.append('date', date);
     if(oldDate) formData.append('old_date', oldDate);
-    fetch('api_manage_history.php', { method: 'POST', body: formData }).then(r=>r.json()).then(res => {
-        if(res.ok) location.reload();
-        else showToast("Chyba: " + res.error, true);
-    });
+    
+    fetch('api_manage_history.php', { method: 'POST', body: formData })
+        .then(r => r.json())
+        .then(res => {
+            if(res.ok) location.reload();
+            else showToast("Chyba: " + res.error, true);
+        });
 }
 
-// --- FILTRY & SORT ---
+// ==========================================
+// 8. FILTRY A ŘAZENÍ (TABULKA)
+// ==========================================
+
 const tRows = document.querySelectorAll('.songRow');
 
-// Vzájemná filtrace dropdownů
+// Vzájemná aktualizace dropdownů (aby zobrazovaly jen relevantní možnosti)
 function updateDropdownFilters() {
     const catSelect = document.getElementById('tableCat');
     const tagSelect = document.getElementById('tableTag');
@@ -329,7 +439,7 @@ function updateDropdownFilters() {
     const selectedCat = catSelect.value;
     const selectedTag = tagSelect.value;
     
-    // 1. Tagy pro kategorii
+    // 1. Dostupné tagy pro vybranou kategorii
     const availableTags = new Set();
     songsDB.forEach(s => {
         if (selectedCat === "" || s.category === selectedCat) {
@@ -337,7 +447,7 @@ function updateDropdownFilters() {
         }
     });
 
-    // 2. Kategorie pro tag
+    // 2. Dostupné kategorie pro vybraný tag
     const availableCats = new Set();
     songsDB.forEach(s => {
         const songTags = s.tags ? s.tags.split(',').map(t => t.trim()) : [];
@@ -346,6 +456,7 @@ function updateDropdownFilters() {
         }
     });
 
+    // Pomocná funkce pro vykreslení options
     const renderOptions = (selectEl, validSet, currentValue, allLabel) => {
         const wasSelected = currentValue;
         selectEl.innerHTML = `<option value="">${allLabel}</option>`;
@@ -359,6 +470,7 @@ function updateDropdownFilters() {
         });
     };
 
+    // Logika, aby se nepřekreslovalo to, co právě edituji
     if (document.activeElement === catSelect) {
          renderOptions(tagSelect, availableTags, selectedTag, "Všechny tagy");
     } else if (document.activeElement === tagSelect) {
@@ -369,21 +481,28 @@ function updateDropdownFilters() {
     }
 }
 
+// Hlavní filtrační funkce
 function filterTable() {
     const q = document.getElementById('tableSearch').value.toLowerCase();
     const cat = document.getElementById('tableCat').value;
     const tag = document.getElementById('tableTag').value;
+    const tempo = document.getElementById('tableTempo').value; // Nový filtr
     const minDays = document.getElementById('filterDays').value;
     
     tRows.forEach(row => {
         const txt = row.innerText.toLowerCase();
+        
+        // Získání hodnot z buněk (pozor na indexy!)
+        // 0: Název, 1: Kategorie, 2: Tempo, 3: Tagy, 4: Počet, 5: Datum
         const rCat = row.cells[1].innerText;
-        const rTags = row.cells[2].innerText.toLowerCase();
+        const rTempo = row.cells[2].innerText;
+        const rTags = row.cells[3].innerText.toLowerCase();
         const rDays = parseInt(row.getAttribute('data-days')) || 99999;
         
         let show = true;
         
         if(cat && rCat !== cat) show = false;
+        if(tempo && rTempo !== tempo) show = false; // Kontrola tempa
         if(tag && !rTags.includes(tag.toLowerCase())) show = false;
         if(q && !txt.includes(q)) show = false;
         if(minDays && rDays < parseInt(minDays)) show = false;
@@ -394,35 +513,54 @@ function filterTable() {
     updateDropdownFilters();
 }
 
+// Listenery pro filtry
 document.getElementById('tableSearch').addEventListener('input', filterTable);
 document.getElementById('tableCat').addEventListener('change', filterTable);
 document.getElementById('tableTag').addEventListener('change', filterTable);
+document.getElementById('tableTempo').addEventListener('change', filterTable); // Listener pro tempo
 document.getElementById('filterDays').addEventListener('input', filterTable);
 
+// Řazení tabulky
 let sortDir = {};
 function sortTable(n) {
     const table = document.getElementById("songsTable");
     const tbody = table.querySelector("tbody");
     const rows = Array.from(tbody.rows);
+    
+    // Reset šipek
     document.querySelectorAll("th span.arrow").forEach(sp => sp.innerHTML = "↕");
+    
+    // Přepnutí směru
     sortDir[n] = !sortDir[n];
     const dir = sortDir[n] ? 1 : -1;
+    
+    // Nastavení aktivní šipky
     const th = table.rows[0].cells[n];
     th.querySelector("span.arrow").innerHTML = dir === 1 ? "▲" : "▼";
+    
     rows.sort((a, b) => {
         const x = a.cells[n].innerText.trim();
         const y = b.cells[n].innerText.trim();
-        if(n === 3) return dir * (parseInt(x) - parseInt(y));
-        if(n === 4) { 
+        
+        // Logika podle sloupce
+        // Index 4: Počet hraní (číslo)
+        if(n === 4) return dir * (parseInt(x) - parseInt(y));
+        
+        // Index 5: Datum (dd.mm.yy)
+        if(n === 5) { 
             const getTs = (s) => {
                 if(s === "-" || s === "") return 0;
                 const p = s.split(/[\. ]+/); 
+                // p[0]=den, p[1]=měsíc, p[2]=rok
                 if(p.length >= 3) return new Date(p[2], p[1]-1, p[0]).getTime();
                 return 0;
             };
             return dir * (getTs(x) - getTs(y));
         }
+        
+        // Ostatní: Textové porovnání (Název, Kat, Tempo, Tagy)
         return dir * x.localeCompare(y, 'cs');
     });
+    
     rows.forEach(r => tbody.appendChild(r));
 }
