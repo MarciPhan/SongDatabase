@@ -20,7 +20,7 @@ require_once "logic.php";
 
 <div class="wrap">
 
-    <div class="dashboard-grid">
+    <div class="dashboard-grid" style="grid-template-columns: 1fr;"> 
         <div class="card">
             <div class="panel-title">Menu</div>
             <div class="action-btn-grid">
@@ -28,12 +28,6 @@ require_once "logic.php";
                 <div class="big-btn" onclick="renderGlobalHistory()"><span>📅</span> Historie</div>
                 <div class="big-btn" onclick="openAddModal()"><span>✨</span> Přidat</div>
                 <div class="big-btn primary" onclick="openModal('modalPlay')"><span>➕</span> Zapsat</div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="panel-title">Top 5</div>
-            <div style="height:200px; position:relative;">
-                <canvas id="chartTop"></canvas>
             </div>
         </div>
     </div>
@@ -45,11 +39,15 @@ require_once "logic.php";
         </div>
         
         <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:15px;">
+            <input type="number" id="filterDays" placeholder="Nehráno dní (min)" min="0" style="flex:1; min-width:130px;" title="Zobrazit písně, které nebyly hrány X a více dní">
+            
             <input type="text" id="tableSearch" placeholder="Hledat..." style="flex:2; min-width:180px;">
+            
             <select id="tableCat" style="flex:1; min-width:130px;">
                 <option value="">Všechny kategorie</option>
                 <?php foreach ($categories as $c) echo "<option>" . htmlspecialchars($c) . "</option>"; ?>
             </select>
+            
             <select id="tableTag" style="flex:1; min-width:130px;">
                 <option value="">Všechny tagy</option>
                 <?php foreach ($tags as $t) echo "<option>" . htmlspecialchars($t) . "</option>"; ?>
@@ -72,12 +70,17 @@ require_once "logic.php";
                 <?php foreach ($songsData as $s): 
                     $last = $s["last"] ?? "";
                     if (isset($s["history"]) && is_array($s["history"]) && count($s["history"]) > 0) $last = $s["history"][0];
-                    $days = 9999;
-                    if($last) $days = (time() - strtotime($last)) / 86400;
-                    $cls = ($days > 180 && $last) ? "row-red" : "";
+                    
+                    // Výpočet dní
+                    $daysDiff = 99999;
+                    if($last) {
+                        $daysDiff = floor((time() - strtotime($last)) / 86400);
+                    }
+
+                    $cls = ($daysDiff > 180 && $last) ? "row-red" : "";
                     $safeData = htmlspecialchars(json_encode($s), ENT_QUOTES, 'UTF-8');
                 ?>
-                <tr class="songRow <?= $cls ?>">
+                <tr class="songRow <?= $cls ?>" data-days="<?= $daysDiff ?>">
                     <td>
                         <div style="font-weight:600; color:#333;"><?= htmlspecialchars($s["name"]) ?></div>
                         <div style="font-size:12px; color:#888;"><?= htmlspecialchars($s["author"]) ?></div>
@@ -201,33 +204,41 @@ require_once "logic.php";
 </div>
 
 <div id="modalStats" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <div class="modal-title">📊 Statistiky</div>
+    <div class="modal-content large"> <div class="modal-header">
+            <div class="modal-title">📊 Hudební spektrum</div>
             <span class="close-btn" onclick="closeModal('modalStats')">&times;</span>
         </div>
         <div class="modal-body">
-            <div class="stats-compact-row">
+            <p style="text-align:center; color:#666; font-size:14px; margin-bottom:20px;">
+                Porovnání 20 nejhranějších hitů a 20 největších rarit.
+            </p>
+            
+            <div class="charts-container">
+                <div class="chart-box">
+                    <h3 style="text-align:center; color:#d11a2a; margin-bottom:10px;">🔥 Síň slávy (Top 20)</h3>
+                    <div style="height: 400px; position: relative;">
+                        <canvas id="topChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-box">
+                    <h3 style="text-align:center; color:#555; margin-bottom:10px;">💎 Podzemí (Rarity 20)</h3>
+                    <div style="height: 400px; position: relative;">
+                        <canvas id="flopChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="stats-compact-row" style="margin-top:20px;">
                 <div class="stat-item">
                     <span class="stat-val"><?= count($songsData) ?></span>
-                    <span class="stat-lbl">Písní</span>
+                    <span class="stat-lbl">Písní celkem</span>
                 </div>
                 <div style="width:1px; background:#eee;"></div>
                 <div class="stat-item">
                     <span class="stat-val"><?= $totalPlays ?></span>
-                    <span class="stat-lbl">Hraní</span>
+                    <span class="stat-lbl">Celkem zahráno</span>
                 </div>
             </div>
-            
-            <div style="background:#fff0f1; padding:12px; border-radius:10px; margin-bottom:10px; border:1px solid #ffccd0;">
-                <h4 style="color:#d11a2a; margin:0 0 8px 0; font-size:15px;">🕰️ Zapomenuté</h4>
-                <div style="display:flex; align-items:center; gap:8px;">
-                    <label style="font-size:13px; color:#555;">Nehráno měsíců:</label>
-                    <input type="number" id="statsMonthsInput" value="6" min="1" style="width:60px; padding:6px; font-weight:bold; color:#d11a2a; border-radius:6px; border:1px solid #ccc;">
-                </div>
-            </div>
-            
-            <div id="neglectedContainer"></div>
         </div>
     </div>
 </div>
@@ -237,11 +248,14 @@ require_once "logic.php";
 <div id="toast">Zpráva</div>
 
 <script>
+    // Předáváme data do JS (Top 20 a Flop 20)
     window.serverData = {
         songs: <?= json_encode($songsData) ?>,
-        chart: {
-            labels: <?= json_encode(array_column(array_slice($topSongs,0,5), "name")) ?>,
-            data: <?= json_encode(array_column(array_slice($topSongs,0,5), "count")) ?>
+        stats: {
+            topLabels: <?= json_encode(array_column($top20, "name")) ?>,
+            topData: <?= json_encode(array_column($top20, "count")) ?>,
+            flopLabels: <?= json_encode(array_column($flop20, "name")) ?>,
+            flopData: <?= json_encode(array_column($flop20, "count")) ?>
         }
     };
 </script>
