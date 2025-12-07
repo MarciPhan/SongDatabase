@@ -3,6 +3,10 @@
 const songsDB = window.serverData.songs;
 let currentEditingSong = null;
 
+// Proměnné pro Chart.js instance (abychom je mohli zničit před překreslením)
+let chartInstanceTop = null;
+let chartInstanceFlop = null;
+
 // UI UTILS
 function showToast(msg, isError = false) {
     const t = document.getElementById("toast");
@@ -49,59 +53,64 @@ function openModal(id) { document.getElementById(id).style.display = "flex"; }
 function closeModal(id) { document.getElementById(id).style.display = "none"; }
 window.onclick = function(e) { if(e.target.classList.contains('modal')) e.target.style.display="none"; }
 
-// --- STATISTIKY ---
+// --- STATISTIKY (NOVÉ - HUDEBNÍ SPEKTRUM) ---
 function openStats() {
-    renderStatsList();
     openModal('modalStats');
-}
+    
+    // Zničení starých grafů, pokud existují (Chart.js to vyžaduje)
+    if (chartInstanceTop) chartInstanceTop.destroy();
+    if (chartInstanceFlop) chartInstanceFlop.destroy();
 
-function renderStatsList() {
-    const container = document.getElementById('neglectedContainer');
-    const monthsInput = document.getElementById('statsMonthsInput');
-    let months = parseInt(monthsInput.value);
-    if(!months || months < 1) { months = 6; monthsInput.value = 6; }
-    
-    container.innerHTML = "";
-    
-    const cutoff = new Date();
-    cutoff.setMonth(cutoff.getMonth() - months);
-    
-    let neglected = songsDB.filter(s => {
-        let lastDateStr = s.last;
-        if (s.history && s.history.length > 0) lastDateStr = s.history[0];
-        if (!lastDateStr) return true; 
-        return new Date(lastDateStr) < cutoff;
+    const statsData = window.serverData.stats;
+
+    // 1. Graf TOP 20
+    const ctxTop = document.getElementById('topChart').getContext('2d');
+    chartInstanceTop = new Chart(ctxTop, {
+        type: 'bar',
+        data: {
+            labels: statsData.topLabels,
+            datasets: [{
+                label: 'Počet hraní',
+                data: statsData.topData,
+                backgroundColor: 'rgba(209, 26, 42, 0.7)', // Červená
+                borderColor: 'rgba(209, 26, 42, 1)',
+                borderWidth: 1,
+                borderRadius: 4
+            }]
+        },
+        options: {
+            indexAxis: 'y', // Horizontální graf
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: { x: { beginAtZero: true } }
+        }
     });
 
-    neglected.sort((a,b) => {
-        const dA = a.last ? new Date(a.last).getTime() : 0;
-        const dB = b.last ? new Date(b.last).getTime() : 0;
-        return dA - dB;
+    // 2. Graf FLOP 20 (Rarity)
+    const ctxFlop = document.getElementById('flopChart').getContext('2d');
+    chartInstanceFlop = new Chart(ctxFlop, {
+        type: 'bar',
+        data: {
+            labels: statsData.flopLabels,
+            datasets: [{
+                label: 'Počet hraní',
+                data: statsData.flopData,
+                backgroundColor: 'rgba(100, 100, 100, 0.5)', // Šedá
+                borderColor: 'rgba(100, 100, 100, 1)',
+                borderWidth: 1,
+                borderRadius: 4
+            }]
+        },
+        options: {
+            indexAxis: 'y', // Horizontální graf
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: { x: { beginAtZero: true, ticks: { stepSize: 1 } } }
+        }
     });
-    
-    if(neglected.length === 0) {
-        container.innerHTML = "<div style='padding:15px;text-align:center;color:#999;font-size:14px;'>Vše zahráno! 🎉</div>";
-    } else {
-        neglected.slice(0, 50).forEach(s => {
-            let lastText = "Nikdy";
-            if(s.last) lastText = new Date(s.last).toLocaleDateString('cs-CZ');
-            else if(s.history && s.history[0]) lastText = new Date(s.history[0]).toLocaleDateString('cs-CZ');
-
-            const div = document.createElement('div');
-            div.className = "neglected-card";
-            div.innerHTML = `
-                <div class="neglected-info">
-                    <b>${s.name}</b> 
-                    <small>${s.author || ''}</small>
-                </div>
-                <div class="neglected-date">${lastText}</div>
-            `;
-            container.appendChild(div);
-        });
-    }
 }
-
-document.getElementById('statsMonthsInput').addEventListener('input', renderStatsList);
 
 // --- SPRÁVA PÍSNĚ ---
 function openAddModal() {
@@ -187,10 +196,6 @@ async function editHistoryDate(oldDate) {
         callHistoryApi('update', newDate, true, oldDate); 
     }
 }
-
-// ============================================
-// OPRAVENÁ FUNKCE: Přidán location.reload()
-// ============================================
 function callHistoryApi(action, date, reload = true, oldDate = null) {
     const formData = new FormData();
     formData.append('song', currentEditingSong.name);
@@ -199,13 +204,12 @@ function callHistoryApi(action, date, reload = true, oldDate = null) {
     if(oldDate) formData.append('old_date', oldDate);
     fetch('api_manage_history.php', { method: 'POST', body: formData }).then(r=>r.json()).then(res => {
         if(res.ok) {
-            // ZDE BYLA CHYBA: Chyběl reload, takže se neaktualizovala tabulka "Počet"
+            currentEditingSong = res.song;
             showToast("Uloženo");
-            setTimeout(() => location.reload(), 300); // Obnovit stránku
+            if(reload) setTimeout(() => location.reload(), 300);
         } else showToast("Chyba: " + res.error, true);
     });
 }
-// ============================================
 
 // --- ZÁPIS HRANÍ ---
 const searchInput = document.getElementById('songSearchInput');
@@ -236,7 +240,6 @@ if(searchInput) {
     });
 }
 
-// ZÁPIS PÍSNĚ (S prevencí duplicit)
 document.getElementById('playForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const btn = document.getElementById('btnSavePlay');
@@ -317,26 +320,84 @@ function callHistoryApiGlobal(songName, action, date, oldDate = null) {
 
 // --- FILTRY & SORT ---
 const tRows = document.querySelectorAll('.songRow');
+
+// Vzájemná filtrace dropdownů
+function updateDropdownFilters() {
+    const catSelect = document.getElementById('tableCat');
+    const tagSelect = document.getElementById('tableTag');
+    
+    const selectedCat = catSelect.value;
+    const selectedTag = tagSelect.value;
+    
+    // 1. Tagy pro kategorii
+    const availableTags = new Set();
+    songsDB.forEach(s => {
+        if (selectedCat === "" || s.category === selectedCat) {
+            if (s.tags) s.tags.split(',').forEach(t => availableTags.add(t.trim()));
+        }
+    });
+
+    // 2. Kategorie pro tag
+    const availableCats = new Set();
+    songsDB.forEach(s => {
+        const songTags = s.tags ? s.tags.split(',').map(t => t.trim()) : [];
+        if (selectedTag === "" || songTags.includes(selectedTag)) {
+            if (s.category) availableCats.add(s.category);
+        }
+    });
+
+    const renderOptions = (selectEl, validSet, currentValue, allLabel) => {
+        const wasSelected = currentValue;
+        selectEl.innerHTML = `<option value="">${allLabel}</option>`;
+        Array.from(validSet).sort().forEach(val => {
+            if(!val) return;
+            const opt = document.createElement('option');
+            opt.value = val;
+            opt.innerText = val;
+            if(val === wasSelected) opt.selected = true;
+            selectEl.appendChild(opt);
+        });
+    };
+
+    if (document.activeElement === catSelect) {
+         renderOptions(tagSelect, availableTags, selectedTag, "Všechny tagy");
+    } else if (document.activeElement === tagSelect) {
+         renderOptions(catSelect, availableCats, selectedCat, "Všechny kategorie");
+    } else {
+         renderOptions(tagSelect, availableTags, selectedTag, "Všechny tagy");
+         renderOptions(catSelect, availableCats, selectedCat, "Všechny kategorie");
+    }
+}
+
 function filterTable() {
     const q = document.getElementById('tableSearch').value.toLowerCase();
     const cat = document.getElementById('tableCat').value;
     const tag = document.getElementById('tableTag').value;
+    const minDays = document.getElementById('filterDays').value;
     
     tRows.forEach(row => {
         const txt = row.innerText.toLowerCase();
         const rCat = row.cells[1].innerText;
         const rTags = row.cells[2].innerText.toLowerCase();
+        const rDays = parseInt(row.getAttribute('data-days')) || 99999;
         
         let show = true;
+        
         if(cat && rCat !== cat) show = false;
         if(tag && !rTags.includes(tag.toLowerCase())) show = false;
         if(q && !txt.includes(q)) show = false;
+        if(minDays && rDays < parseInt(minDays)) show = false;
+        
         row.style.display = show ? "" : "none";
     });
+
+    updateDropdownFilters();
 }
+
 document.getElementById('tableSearch').addEventListener('input', filterTable);
 document.getElementById('tableCat').addEventListener('change', filterTable);
 document.getElementById('tableTag').addEventListener('change', filterTable);
+document.getElementById('filterDays').addEventListener('input', filterTable);
 
 let sortDir = {};
 function sortTable(n) {
@@ -364,15 +425,4 @@ function sortTable(n) {
         return dir * x.localeCompare(y, 'cs');
     });
     rows.forEach(r => tbody.appendChild(r));
-}
-
-if(document.getElementById('chartTop')) {
-    new Chart(document.getElementById('chartTop'), {
-        type:"doughnut",
-        data:{
-            labels: window.serverData.chart.labels,
-            datasets:[{ data: window.serverData.chart.data, backgroundColor: ['#d11a2a', '#e84a5f', '#ff847c', '#fecea8', '#99b898'] }]
-        },
-        options:{ responsive:true, maintainAspectRatio: false, plugins:{ legend:{position:'right'} } }
-    });
 }
