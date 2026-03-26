@@ -137,7 +137,59 @@ body {
 }
 
 .btn {
-    display: block;
+    display: block;/* Ikony a tlačítka */
+.big-btn svg, .btn svg, .icon-btn svg, .quick-play-btn svg, .edit-btn svg, .download-btn svg {
+    vertical-align: middle;
+    margin-right: 8px;
+}
+.quick-play-btn svg, .edit-btn svg, .download-btn svg, .icon-btn svg {
+    margin-right: 0; /* Ikony bez textu */
+}
+.title svg {
+    vertical-align: sub;
+    margin-right: 12px;
+}
+.modal-title svg {
+    vertical-align: middle;
+    margin-right: 10px;
+}
+.quick-play-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    background: #fff;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.quick-play-btn:hover {
+    background: #f0f0f0;
+    border-color: #ccc;
+}
+.quick-play-btn.danger:hover {
+    background: #fff5f5;
+    border-color: #d11a2a;
+}
+.edit-btn, .download-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+}
+.edit-btn:hover, .download-btn:hover {
+    opacity: 1;
+}
     width: 100%;
     border: none;
     background: #d11a2a;

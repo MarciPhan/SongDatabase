@@ -9,6 +9,18 @@ let currentEditingSong = null;
 let chartInstanceTop = null;
 let chartInstanceFlop = null;
 
+// SVG Ikony (Lucide style)
+const ICONS = {
+    plus: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>`,
+    minus: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg>`,
+    pencil: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>`,
+    download: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>`,
+    trash: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>`,
+    history: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><polyline points="3 3 3 8 8 8"></polyline><line x1="12" y1="7" x2="12" y2="12"></line><line x1="12" y1="12" x2="16" y2="14"></line></svg>`,
+    chart: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>`,
+    undo: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7v6h6"></path><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"></path></svg>`
+};
+
 // Historie pro funkci Zpět (max 5 stavů)
 let undoStack = [];
 function saveUndoState() {
@@ -590,11 +602,11 @@ document.getElementById('playForm').addEventListener('submit', function(e) {
 
 async function recordQuickPlay(songName) {
     saveUndoState();
-    const dateVal = new Date().toISOString().split('T')[0];
+    const dateVal = toIsoDate(getTypicalDate()); // Použije logiku nejbližší neděle
     const s = songsDB.find(x => x.name === songName);
     
     if (s && s.history && s.history.includes(dateVal)) {
-        if (!await uiConfirm(`Píseň "${songName}" už je pro dnešek zapsána. Přesto přidat další záznam?`, "Duplicitní zápis")) return;
+        if (!await uiConfirm(`Píseň "${songName}" už je pro datum ${fromIsoDate(dateVal)} zapsána. Přesto přidat další záznam?`, "Duplicitní zápis")) return;
     }
 
     const formData = new FormData();
@@ -626,6 +638,38 @@ async function recordQuickPlay(songName) {
         });
 }
 
+async function deleteLastPlay(songName) {
+    const s = songsDB.find(x => x.name === songName);
+    if (!s || !s.history || s.history.length === 0) return showToast("Žádná historie k smazání.", true);
+    
+    const lastDate = s.history[0];
+    if (!await uiConfirm(`Smazat poslední záznam (${fromIsoDate(lastDate)}) u písně "${songName}"?`, "Smazat poslední datum")) return;
+    
+    saveUndoState();
+    
+    // Optimistická aktualizace
+    s.history.shift();
+    s.last = s.history.length > 0 ? s.history[0] : "";
+    s.count = s.history.length;
+    renderTable();
+    showToast("Mažu poslední záznam...");
+    
+    const formData = new FormData();
+    formData.append('song', songName);
+    formData.append('action', 'remove');
+    formData.append('date', lastDate);
+    
+    fetch('api_manage_history.php', { method: 'POST', body: formData })
+        .then(r => r.json())
+        .then(res => {
+            if(res.ok) showToast("Smazáno");
+            else {
+                showToast("Chyba: " + res.error, true);
+                location.reload();
+            }
+        });
+}
+
 // ==========================================
 // 7. GLOBÁLNÍ HISTORIE (VŠECHNY PÍSNĚ)
 // ==========================================
@@ -654,8 +698,8 @@ function renderGlobalHistory() {
                 <div class="h-date">${d}</div>
                 <div class="h-name">${item.name}</div>
                 <div class="h-actions">
-                    <button class="icon-btn" onclick="editHistoryItem('${item.name}', '${item.date}')" title="Upravit">Upravit</button>
-                    <button class="icon-btn" onclick="deleteHistoryItem('${item.name}', '${item.date}')" title="Smazat" style="color:#ff4d4d">&times;</button>
+                    <button class="icon-btn" onclick="editHistoryItem('${item.name}', '${item.date}')" title="Upravit">${ICONS.pencil}</button>
+                    <button class="icon-btn" onclick="deleteHistoryItem('${item.name}', '${item.date}')" title="Smazat" style="color:#d11a2a">${ICONS.trash}</button>
                 </div>
             </li>`;
     });
@@ -1093,8 +1137,8 @@ function renderTable() {
         const canDownload = hasPdf || hasOpenlp;
 
         const downloadBtn = canDownload
-            ? `<button onclick='uiDownloadChoice("${s.name.replace(/"/g, "&quot;")}")' class="download-btn active" title="Stáhnout přílohy">Stáhnout</button>`
-            : `<button class="download-btn disabled" title="Žádné přílohy k dispozici">Stáhnout</button>`;
+            ? `<button onclick='uiDownloadChoice("${s.name.replace(/"/g, "&quot;")}")' class="download-btn active" title="Stáhnout přílohy">${ICONS.download}</button>`
+            : `<button class="download-btn disabled" title="Žádné přílohy k dispozici">${ICONS.download}</button>`;
 
         tr.innerHTML = `
             <td style="text-align:center;"><input type="checkbox" class="songCheckbox" value="${s.name}" onclick="updateBulkBar()"></td>
@@ -1109,8 +1153,9 @@ function renderTable() {
             <td style="font-family:inherit; color:#666; text-align:right;" title="${relativeLast}">${lastShort}</td>
             <td style="text-align:right; white-space:nowrap;">
                 ${downloadBtn}
-                <button onclick='recordQuickPlay("${s.name.replace(/"/g, "&quot;")}")' class="quick-play-btn" title="Rychle zapsat hraní">+</button>
-                <button onclick='openEditModal(${safeData})' class="edit-btn" title="Upravit">Upravit</button>
+                <button onclick='recordQuickPlay("${s.name.replace(/"/g, "&quot;")}")' class="quick-play-btn" title="Rychle zapsat hraní">${ICONS.plus}</button>
+                <button onclick='deleteLastPlay("${s.name.replace(/"/g, "&quot;")}")' class="quick-play-btn danger" style="color:#d11a2a; border-color:#d11a2a; margin-left:4px;" title="Smazat poslední datum">${ICONS.trash}</button>
+                <button onclick='openEditModal(${safeData})' class="edit-btn" title="Upravit">${ICONS.pencil}</button>
             </td>
         `;
         tbody.appendChild(tr);
