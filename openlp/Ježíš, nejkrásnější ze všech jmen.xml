@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<song xmlns="http://openlyrics.info/namespace/2009/song" version="0.8">
+  <properties>
+    <titles>
+      <title>Ježíš, nejkrásnější ze všech jmen</title>
+    </titles>
+    <authors>
+      <author>Neznámý autor</author>
+    </authors>
+    <verseOrder>v1 v2 v3</verseOrder>
+  </properties>
+  <lyrics>
+    <verse name="v1">
+      <lines>Ježíš,
+nejkrásnější ze všech jmen,
+Ježíš slyší hlasmůj každý den,
+ó Ježíš mne v mém pádu pozvedá,
+ó Ježíš,
+krásné jméno má.</lines>
+    </verse>
+    <verse name="v2">
+      <lines>Ježíš,
+chválu vzdává srdce mé,
+Ježíš,
+stále stejný včera dnes,
+ó Ježíš zemřel též za hříchy mé,
+ó Ježíš,
+nejkrásnější z jmen.</lines>
+    </verse>
+    <verse name="v3">
+      <lines>Ježíš přijde brzy jako král,
+Ježíš přines lásku na zem k nám,
+ó Ježíš,
+jemu chválu zazpívám,
+ó Ježíš krásné jméno má.</lines>
+    </verse>
+  </lyrics>
+</song>

@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<song xmlns="http://openlyrics.info/namespace/2009/song" version="0.8">
+  <properties>
+    <titles>
+      <title>Hospodin kraluje</title>
+    </titles>
+    <authors>
+      <author>Jiřina Markovová</author>
+    </authors>
+    <verseOrder>v1</verseOrder>
+  </properties>
+  <lyrics>
+    <verse name="v1">
+      <lines>Hospodin kraluje oděl se důstojností,
+oděl se Hospodin mocí se opásal.
+Pevně je založen svět,
+nic s ním neotřese,
+Tvůj trůn pevně stojí ode dávna Ty jsi od věčnosti.
+Zvedají řeky Hospodine zvedají řeky svůj hlas,
+zvedám i já Hospodine zvedám i já svůj hlas zvedají hlas.</lines>
+    </verse>
+  </lyrics>
+</song>

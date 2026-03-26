@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+<song xmlns="http://openlyrics.info/namespace/2009/song" version="0.8">
+  <properties>
+    <titles>
+      <title>Živý je Pán</title>
+    </titles>
+    <authors>
+      <author>Neznámý autor</author>
+    </authors>
+    <verseOrder>v1a v1b v2</verseOrder>
+  </properties>
+  <lyrics>
+    <verse name="v1a">
+      <lines>Živý je Pán,
+živý je Pán,
+živý je Pán na věky věků.
+věků.</lines>
+    </verse>
+    <verse name="v1b">
+      <lines>Nebo tak Bůh miloval svět,
+že Syna svého,
+jednorozeného za nás dal,
+aby každý,
+kdo uvěří v něho,
+nezahynul,
+ale měl s ním věčně život v nebi.</lines>
+    </verse>
+    <verse name="v2">
+      <lines>Nenarodíli se kdo z vody a z Ducha,
+nemůže vejít do království,
+jistě žádný nevstoupí v nebeské království,
+jestliže se znovu nenarodí.</lines>
+    </verse>
+  </lyrics>
+</song>

@@ -1,0 +1,50 @@
+<?xml version="1.0" ?>
+<song xmlns="http://openlyrics.info/namespace/2009/song" version="0.8">
+  <properties>
+    <titles>
+      <title>Chvalozpěv</title>
+    </titles>
+    <authors>
+      <author>Miloš Rejchrt</author>
+    </authors>
+    <verseOrder>v1a v1b v2 v3 v4</verseOrder>
+  </properties>
+  <lyrics>
+    <verse name="v1a">
+      <lines>Neskládejte v mocných naději,
+v síle,
+jejich,
+která skály láme.</lines>
+    </verse>
+    <verse name="v1b">
+      <lines>Ochabne dřív nebo později,
+nedoufejte v zdání,
+které klame.
+Ty jsi hoden žehnání a chvály,
+Tvoji moc a sílu slavíme,
+před Tebou se Pane Kriste,
+králů Králi,
+dobrovolně skláníme dobrovolně skláníme.</lines>
+    </verse>
+    <verse name="v2">
+      <lines>Vláda Jeho není na chvíli,
+pravda věčně platí v Jeho říši.
+V Jeho panství není násilí,
+blaze tomu,
+kdo hlas Jeho slyší.</lines>
+    </verse>
+    <verse name="v3">
+      <lines>Žíznivým dá napít z pramene nedolomí nalomenou třtinu.
+Proměňuje srdce kamenné,
+odpustí i zbloudilému synu.</lines>
+    </verse>
+    <verse name="v4">
+      <lines>Znaveným On síly dodává,
+uvězněným snímá pouta z rukou.
+Stojí při těch,
+kdo jsou bez práva,
+otevírá všechněm,
+kteří tlukou.</lines>
+    </verse>
+  </lyrics>
+</song>

@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<song xmlns="http://openlyrics.info/namespace/2009/song" version="0.8">
+  <properties>
+    <titles>
+      <title>Kristova krev a spravednost</title>
+    </titles>
+    <authors>
+      <author>Neznámý autor</author>
+    </authors>
+    <verseOrder>v1</verseOrder>
+  </properties>
+  <lyrics>
+    <verse name="v1">
+      <lines>Kristova krev a spravedlnost,
+je svatební můj šat a skvost.
+Jímž pro nebe se přistrojím,
+a před Bohem,
+vněm obstojím.</lines>
+    </verse>
+  </lyrics>
+</song>

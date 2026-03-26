@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<song xmlns="http://openlyrics.info/namespace/2009/song" version="0.8">
+  <properties>
+    <titles>
+      <title>Přijď, Spasiteli</title>
+    </titles>
+    <authors>
+      <author>Daniel Henych</author>
+      <author>francouzská, 15. století</author>
+    </authors>
+    <verseOrder>v1a v1b v2 v3 v4</verseOrder>
+  </properties>
+  <lyrics>
+    <verse name="v1a">
+      <lines>Přijď Spasiteli,
+z našich pout jen Ty nás můžeš vytrhnout.
+Jha zbaven byl též Izrael,
+když k Bohu jeho nářek zněl.</lines>
+    </verse>
+    <verse name="v1b">
+      <lines>Ať zní,
+ať zní,
+ať zní do všech stran,
+že Bůh se sklání v lásce k nám.
+Ať k nám.</lines>
+    </verse>
+    <verse name="v2">
+      <lines>Přijď,
+vyžeň všechnu temnotu,
+buď sluncem našich životů.
+Svým světlem sviť,
+kde vládne noc.
+Slyš naše prosby o pomoc!</lines>
+    </verse>
+    <verse name="v3">
+      <lines>Přijď,
+zjev se v slávě jako král,
+jenž kdysi lidem Zákon dal.
+Přijď však i jako Mesiáš,
+náš dlouhý dlužní zápis smaž!</lines>
+    </verse>
+    <verse name="v4">
+      <lines>Přijď dát nám všem,
+jež trápí hřích,
+klíč ode dveří zavřených a vpusť nás
+ve své milosti do říše věčné radosti.</lines>
+    </verse>
+  </lyrics>
+</song>

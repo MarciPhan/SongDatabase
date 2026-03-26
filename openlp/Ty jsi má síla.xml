@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+<song xmlns="http://openlyrics.info/namespace/2009/song" version="0.8">
+  <properties>
+    <titles>
+      <title>Ty jsi má síla</title>
+    </titles>
+    <authors>
+      <author>Dennis Jernigan</author>
+      <author>přeložil Otakar Vožeh</author>
+    </authors>
+    <verseOrder>v1a v1b v1c v2a v2b</verseOrder>
+  </properties>
+  <lyrics>
+    <verse name="v1a">
+      <lines>Boží Beránku!
+Chválu,
+čest ti vzdávám!
+Boží Beránku!</lines>
+    </verse>
+    <verse name="v1b">
+      <lines>Chválu,
+čest ti vzdám!
+Ty jsi má síla když jsem sláb.</lines>
+    </verse>
+    <verse name="v1c">
+      <lines>Ty jsi můj poklad mám Tě rád.
+Ty jsi mi prostě vším.
+Ty jsi má skála,
+Tys můj štít.
+Bez Tebe nechci nikdy být.
+Ty jsi mi prostě vším!</lines>
+    </verse>
+    <verse name="v2a">
+      <lines>Vzal jsi můj hřích,
+můj kříž,
+můj žal.
+Díky za život cos mi dal.</lines>
+    </verse>
+    <verse name="v2b">
+      <lines>Ty jsi mi prostě vším.
+Padnuli Ty mě pozvedáš.
+Útěchu svou mi vždycky dáš.
+Ty jsi mi prostě vším!</lines>
+    </verse>
+  </lyrics>
+</song>

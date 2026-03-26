@@ -1,0 +1,121 @@
+<?xml version="1.0" ?>
+<song xmlns="http://openlyrics.info/namespace/2009/song" version="0.8">
+  <properties>
+    <titles>
+      <title>Zachánce vzácný</title>
+    </titles>
+    <authors>
+      <author>Mark Hall, Bernie Herms</author>
+      <author>Ladislav Štěpán</author>
+    </authors>
+    <verseOrder>v1a v1b v1c v1d v1e v1f v1g v1h v2a v2b v2c v2d v3a v3b v3c</verseOrder>
+  </properties>
+  <lyrics>
+    <verse name="v1a">
+      <lines>Muž vzhůru kráčel,
+šel Golgotou,
+On hříchů vzdálen vzal vinu mou.
+Tak velká láska,
+tak hrozný kříž,
+Ježíš,
+má spása,
+věčně smím žít.</lines>
+    </verse>
+    <verse name="v1b">
+      <lines>Zachránce vzácný,
+mocný král slávy,
+vidím jak stoupá na Golgotský kříž.
+Bolestí svírán,
+tupen a týrán,
+to za mé chříchy smrti je blíž.</lines>
+    </verse>
+    <verse name="v1c">
+      <lines>Muž vzhůru kráčel,
+šel Golgotou,
+On hříchů vzdálen vzal vinu mou.</lines>
+    </verse>
+    <verse name="v1d">
+      <lines>Tak velká láska,
+tak hrozný kříž,
+Ježíš,
+má spása,
+věčně smím žít.</lines>
+    </verse>
+    <verse name="v1e">
+      <lines>Zachránce vzácný,
+mocný král slávy,
+vidím jak stoupá na Golgotský kříž.
+Bolestí svírán,
+tupen a týrán,
+to za mé chříchy smrti je blíž.</lines>
+    </verse>
+    <verse name="v1f">
+      <lines>Muž vzhůru kráčel,
+šel Golgotou,
+On hříchů vzdálen vzal vinu mou.</lines>
+    </verse>
+    <verse name="v1g">
+      <lines>Tak velká láska,
+tak hrozný kříž,
+Ježíš,
+má spása,
+věčně smím žít.</lines>
+    </verse>
+    <verse name="v1h">
+      <lines>Zachránce vzácný,
+mocný král slávy,
+vidím jak stoupá na Golgotský kříž.
+Bolestí svírán,
+tupen a týrán,
+to za mé chříchy smrti je Zachránce vzácblíž.</lines>
+    </verse>
+    <verse name="v2a">
+      <lines>Odpusť jim Otče,
+modlil se tmou,
+i když vyléval svou krev přesvatou.
+Za nás,
+za hříšné z kříže hlas zněl,
+kdo větší lásku než Ježíš měl.</lines>
+    </verse>
+    <verse name="v2b">
+      <lines>Odpusť jim Otče,
+modlil se tmou,
+i když vyléval svou krev přesvatou.</lines>
+    </verse>
+    <verse name="v2c">
+      <lines>Za nás,
+za hříšné z kříže hlas zněl,
+kdo větší lásku než Ježíš měl.
+</lines>
+    </verse>
+    <verse name="v2d">
+      <lines>Odpusť jim Otče,
+modlil se tmou,
+i když vyléval svou krev přesvatou.
+Za nás,
+za hříšné z kříže hlas zněl,
+kdo větší lásku než Ježíš měl.</lines>
+    </verse>
+    <verse name="v3a">
+      <lines>Ty jsi mou láskou,
+zachráncem mým,
+mé chvály proudí před trůnem Tvým.
+Věčností toužím jen s Tebou jít,
+vždy píseň díků v srdci svém mít.</lines>
+    </verse>
+    <verse name="v3b">
+      <lines>Ty jsi mou láskou,
+zachráncem mým,
+mé chvály proudí před trůnem Tvým.</lines>
+    </verse>
+    <verse name="v3c">
+      <lines>Věčností toužím jen s Tebou jít,
+vždy píseň díků v srdci svém mít.
+Ty jsi mou láskou,
+zachráncem mým,
+mé chvály proudí před trůnem Tvým.
+Věčností toužím jen s Tebou jít,
+vždy píseň díků v srdci svém mít.</lines>
+    </verse>
+  </lyrics>
+</song>

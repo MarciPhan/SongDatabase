@@ -1,0 +1,56 @@
+<?xml version="1.0" ?>
+<song xmlns="http://openlyrics.info/namespace/2009/song" version="0.8">
+  <properties>
+    <titles>
+      <title>Otče náš Nebeský</title>
+    </titles>
+    <authors>
+      <author>Karel Řežábek</author>
+    </authors>
+    <verseOrder>v1a v1b v2 v3 v4</verseOrder>
+  </properties>
+  <lyrics>
+    <verse name="v1a">
+      <lines>Otče náš nebeský,
+posvět se jméno Tvé,
+přijď Tvoje království,
+buď vůle Tvá.</lines>
+    </verse>
+    <verse name="v1b">
+      <lines>Tam,
+kde Tvůj lid se probouzí,
+tam,
+kde roste Tvůj chrám,
+v srdcích všech dětí Tvých ať vítězí vůle Tvá,
+ať vítězí vůle Tvá.</lines>
+    </verse>
+    <verse name="v2">
+      <lines>Tam,
+kde Duch svatý přichází,
+dary své rozdává.
+Jaká je teď vůle Tvá?
+"Co dal jsem ti,
+předávej dál,
+co dal jsem ti předávej dál!
+"</lines>
+    </verse>
+    <verse name="v3">
+      <lines>Někdy mne zkoušky tak svírají,
+padám a prohrávám.
+Řekni,
+jak vůle Tvá zní?
+"Bojuj až do vítězství,
+bojuj až do vítězství!
+"</lines>
+    </verse>
+    <verse name="v4">
+      <lines>Pane,
+můj bratr mě nemá rád,
+za zády mě pomlouvá.
+Toužím teď vůli Tvou znát.
+"Odpusť mu tak jako Já,
+Odpusť mu tak jako Já!
+"</lines>
+    </verse>
+  </lyrics>
+</song>

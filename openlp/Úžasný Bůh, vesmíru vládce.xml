@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<song xmlns="http://openlyrics.info/namespace/2009/song" version="0.8">
+  <properties>
+    <titles>
+      <title>Úžasný Bůh, vesmíru vládce</title>
+    </titles>
+    <authors>
+      <author>Darlene Zschech</author>
+    </authors>
+    <verseOrder>v1a v1b v1c</verseOrder>
+  </properties>
+  <lyrics>
+    <verse name="v1a">
+      <lines>Úžasný Bůh,
+vesmíru vládce,
+vím,
+že jsi můj nejlepší rádce,
+jsem v ruce Tvé,
+Ty pro mě máš tak zvláštní plán.</lines>
+    </verse>
+    <verse name="v1b">
+      <lines>Vedeš mě stále do svojí slávy,
+jen s Duchem Tvým chci Pane dál jít,
+v blízkosti Tvé do posledních dnů ať zůstávám.
+Jsem v ruce Tvé,
+svých plánů se vzdávám,
+svůj život rád Ti králi dávám,
+žít každý den smím před tváří Tvou!</lines>
+    </verse>
+    <verse name="v1c">
+      <lines>Toužím dál jít,
+dílem Tvým být jsi hrnčířem,
+já hlínou v rukou Tvých.
+Pánem jsi vzácným,
+Vůdcem,
+který chrání,
+jsi hrnčířem,
+já hlínou v rukou Tvých.</lines>
+    </verse>
+  </lyrics>
+</song>

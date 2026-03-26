@@ -1,0 +1,63 @@
+<?xml version="1.0" ?>
+<song xmlns="http://openlyrics.info/namespace/2009/song" version="0.8">
+  <properties>
+    <titles>
+      <title>Před Božím Trůnem</title>
+    </titles>
+    <authors>
+      <author>Charitie Lees Bancroft</author>
+      <author>Charitie Lees Bancroft, 1863</author>
+      <author>Vicki Cook</author>
+      <author>Vikki Cook</author>
+    </authors>
+    <verseOrder>v1a v1b v2a v2b v3a v3b</verseOrder>
+  </properties>
+  <lyrics>
+    <verse name="v1a">
+      <lines>Před Božím trůnem v nebesích,
+přímluvce mám,
+v něj věřit smím.
+Je králem lásky,
+rád mne má,
+za mě se věr ně při mlou vá.</lines>
+    </verse>
+    <verse name="v1b">
+      <lines>Do dlaní jméno mé si vryl,
+do srdce jméno mé si skryl.
+Já vím,
+že Bůh můj v nebi dlí,
+z náruče Své mne nepustí,
+z náruče Své mne nepustí.</lines>
+    </verse>
+    <verse name="v2a">
+      <lines>Když ďá bel vnáší beznaděj,
+kdyžpřipomíná vinu mou.
+Pohlédnu víš,
+kde je můj Pán,
+On s hříchem navždy skoncoval.</lines>
+    </verse>
+    <verse name="v2b">
+      <lines>Spasitel zemřel nevinný,
+mou duši hříšnou vykoupil.
+Spravedlivý Bůh odpouští,
+když místo mne na Krista zří,
+když místo mne na Krista zří.</lines>
+    </verse>
+    <verse name="v3a">
+      <lines>Hle Beránek,
+Ten vzkříšený,
+Ten který sám je neměnný.
+Spravedliví v Něm mohou být a jednou v nebi s Ním pak žít.</lines>
+    </verse>
+    <verse name="v3b">
+      <lines>Nezemřu,
+když v Něm přebývám,
+On krví Svou mne vykoupil.
+Svůj život v Kristu ukrývám,
+zachránce můj je,
+Bůh a Pán,
+zachránce můj je,
+Bůh a Pán.</lines>
+    </verse>
+  </lyrics>
+</song>

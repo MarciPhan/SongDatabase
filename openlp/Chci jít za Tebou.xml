@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<song xmlns="http://openlyrics.info/namespace/2009/song" version="0.8">
+  <properties>
+    <titles>
+      <title>Chci jít za Tebou</title>
+    </titles>
+    <authors>
+      <author>Martina Střítecká</author>
+    </authors>
+    <verseOrder>v1</verseOrder>
+  </properties>
+  <lyrics>
+    <verse name="v1">
+      <lines>Hledám Tvoji tvář,
+Pane můj,
+hledám Tvoji tvář každý den.
+Po Tobě touží duše má,
+očekávám slovo Tvé Chci jít za Tebou,
+Ježíši cestou Tvou,
+chci jít za Tebou,
+Ježíši za Tebou Za Tebou Pane můj chci
+jít každý den za Tebou Pane můj chci jít.</lines>
+    </verse>
+  </lyrics>
+</song>

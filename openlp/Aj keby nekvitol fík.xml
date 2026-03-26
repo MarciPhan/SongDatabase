@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+<song xmlns="http://openlyrics.info/namespace/2009/song" version="0.8">
+  <properties>
+    <titles>
+      <title>Title</title>
+    </titles>
+    <authors>
+      <author>Composer</author>
+      <author>Miro Tóth</author>
+    </authors>
+    <verseOrder>v1 v2</verseOrder>
+  </properties>
+  <lyrics>
+    <verse name="v1">
+      <lines>Aj keby nekvitol fík.
+Aj keby nerodila zem,
+aj keby nebesá nedoniesli svetlo v nové ráno.
+A aj keď polia zlíhajú a sípky prázdne zostanú,
+a aj keď všetko vôkoľ volá,
+že Boh nieje Áno práve v tedy pozdvyhnem
+svoj hlas a budem spievať chvály uprostred trápení,
+u prostred súžení Ježíš je Pán.
+Áno práve dy pozdvyhnem svoj hlas a budem spievať
+chvály lebo verím ho verím aj keby nekvitol fík</lines>
+    </verse>
+    <verse name="v2">
+      <lines>Keď blízky priateľ opustí a je tak ťažké odpustit a keď sa múry v mojom nútry zrazu rúcajú
+keď sa zdá že to nekončí slzi sa tlačia do očí viem že stojíš blízko tých vTeba dúúfajú</lines>
+    </verse>
+  </lyrics>
+</song>

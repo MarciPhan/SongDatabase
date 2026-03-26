@@ -1,0 +1,63 @@
+<?xml version="1.0" ?>
+<song xmlns="http://openlyrics.info/namespace/2009/song" version="0.8">
+  <properties>
+    <titles>
+      <title>Ó, zůstaň se mnou</title>
+    </titles>
+    <authors>
+      <author>Henry Francis Lyte</author>
+      <author>William Henry Monk</author>
+    </authors>
+    <verseOrder>v1 v2 v3 v4 v5</verseOrder>
+  </properties>
+  <lyrics>
+    <verse name="v1">
+      <lines>zůstaň se mnou,
+rychle kvapí noc.
+Ach temno houstne,
+přijď mi na pomoc!
+Když nikde není potěšení již,
+ó pomoz mdlému,
+se mnou zůstaniž!</lines>
+    </verse>
+    <verse name="v2">
+      <lines>Jak prchá život,
+krátký žití den.
+Slast vetší,
+sláva prchá jako sen.
+Vše mění se,
+jen Ty se neměníš.
+Ó věrná Lásko se mnou zůstaniž!</lines>
+    </verse>
+    <verse name="v3">
+      <lines>Já musím mít Tě,
+Skálo spasení!
+Ty's útočiště ve všem soužení.
+Ó Vůdce v bouři,
+v pokušení,
+slyš!
+Ty,
+Bože silný,
+se mnou zůstaniž!</lines>
+    </verse>
+    <verse name="v4">
+      <lines>Když Ty mi žehnáš,
+nic se nebojím.
+Jdu bez hořkosti slz tím údolím.
+Kde osten smrti,
+hrobu kletby tíž?
+Jen Ty,
+můj Pane,
+se mnou zůstaniž!</lines>
+    </verse>
+    <verse name="v5">
+      <lines>Zjev hasnoucímu oku lásku svou.
+Ó zjevuj se mi mrákot záclonou.
+A táhni k sobě vším mne,
+Pane,
+blíž.
+Ať mru neb živ jsem,
+se mnou zůstaniž!</lines>
+    </verse>
+  </lyrics>
+</song>

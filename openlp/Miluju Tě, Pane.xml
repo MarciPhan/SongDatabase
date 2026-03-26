@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<song xmlns="http://openlyrics.info/namespace/2009/song" version="0.8">
+  <properties>
+    <titles>
+      <title>MIluju Tě, Pane</title>
+    </titles>
+    <authors>
+      <author>Jolana Krásná</author>
+    </authors>
+    <verseOrder>v1a v1b v2</verseOrder>
+  </properties>
+  <lyrics>
+    <verse name="v1a">
+      <lines>Nejbližší jsi přítel můj,
+nejlíp mě znáš,
+přesto dál náruč svou pro mě otvíráš.
+Žasnu nad láskou Tvou a nad Tvou moudrostí.</lines>
+    </verse>
+    <verse name="v1b">
+      <lines>Běžím,
+chci Tě potěšit a zpívám radostí.
+Miluju Tě,
+Pane,
+miluju Tě víc,
+miluju Tě stále a znovu toužím říct,
+jak miluju ty chvíle,
+kdy Ti blízko jsem,
+jak moc jsem ti vděčný,
+že jsi mým přítelem.</lines>
+    </verse>
+    <verse name="v2">
+      <lines>Slovo Tvé mi sílu dává říct hříchu dost.
+Do Tvých rukou odevzdávám svou budoucnost.
+Veď mě,
+Pane ať Tvou vůli dál poznávám.
+Chci mít srdce jako Ty a vyznávám:</lines>
+    </verse>
+  </lyrics>
+</song>

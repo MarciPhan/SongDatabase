@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+<song xmlns="http://openlyrics.info/namespace/2009/song" version="0.8">
+  <properties>
+    <titles>
+      <title>Uprostřed noci</title>
+    </titles>
+    <authors>
+      <author>Lydie Zoubková</author>
+    </authors>
+    <verseOrder>v1a v1b v1c v2a v2b</verseOrder>
+  </properties>
+  <lyrics>
+    <verse name="v1a">
+      <lines>Uprostřed noci v zákoutí stáje
+chlapeček malý choulí se v slámě.
+Napětí sytí krajinu tmoucí,
+z ne be Bůh hledí do temné noci,
+kde spí,
+Boží Syn spí.</lines>
+    </verse>
+    <verse name="v1b">
+      <lines>Andělé nebem krouží a pějí,
+tisíce písní palmami chvějí.
+U svíce sedí starý muž v chrámu,
+cítí,
+že brzy se pokloní Pánu,
+jenž spí,
+v Betlémě spí.</lines>
+    </verse>
+    <verse name="v1c">
+      <lines>Veliká hvězda nad stájí stojí,
+září všem,
+kteří ve tmách se bojí.
+Bůh na zem přišel a jako člověk žil sám.
+Mesiáš přišel a spásu vydobil nám.</lines>
+    </verse>
+    <verse name="v2a">
+      <lines>Uprostřed noci drženi stranou
+nemocní leží za městskou branou,
+nevědí ještě o velkém dění,
+které Bůh chystá,
+které vše změní,
+když spí,
+naděje spí.</lines>
+    </verse>
+    <verse name="v2b">
+      <lines>V řetězech hříchu lid tiše brečí,
+v nádvoří chrámu beránci bečí.
+Bůh z nebe vidí všechny ty slzy a tiše říká,
+bude to brzy Už spí,
+na světě spí.</lines>
+    </verse>
+  </lyrics>
+</song>

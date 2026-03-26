@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<song xmlns="http://openlyrics.info/namespace/2009/song" version="0.8">
+  <properties>
+    <titles>
+      <title>Offering</title>
+    </titles>
+    <authors>
+      <author>Paul Baloche</author>
+      <author>přeložil Petr Stoklasa</author>
+    </authors>
+    <verseOrder>v1a v1b v2</verseOrder>
+  </properties>
+  <lyrics>
+    <verse name="v1a">
+      <lines>Na nebi betlémském hvězda jasně
+nocí září Pastýřům andělzprávu dává.
+Z da leka přichází také moudří hodnostáři,
+by mohli poctít pánů Pána.</lines>
+    </verse>
+    <verse name="v1b">
+      <lines>Na kolena padají a klanějí se vládci pokoje.
+Přináším oběť chval k Tvé slávě králi
+náš Jenom Ty Panovníku právo na ně máš.
+Kéž čestjež náleží Ti přijmeš z chvály mé.
+Pane přináším Ti oběť k slávě Tvé.</lines>
+    </verse>
+    <verse name="v2">
+      <lines>I sláva stvoření bledne ve srovnání s Tvou.
+Není stín v přítomnosti Tvé.
+Nikdo by neobstál se spravedlností svou,
+kde svatý Bůh dlí v slávě Své.
+Jenom díky krvi Tvé,
+a z milosti Tvé vzácné přijít smím.</lines>
+    </verse>
+  </lyrics>
+</song>

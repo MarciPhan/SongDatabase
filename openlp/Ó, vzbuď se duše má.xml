@@ -1,0 +1,59 @@
+<?xml version="1.0" ?>
+<song xmlns="http://openlyrics.info/namespace/2009/song" version="0.8">
+  <properties>
+    <titles>
+      <title>Ó, vzbuď se duše má</title>
+    </titles>
+    <authors>
+      <author>Charles Wesley</author>
+      <author>Lewis Edson</author>
+    </authors>
+    <verseOrder>v1 v2 v3a v3b v4 v5</verseOrder>
+  </properties>
+  <lyrics>
+    <verse name="v1">
+      <lines>Ó vzbuď se duše má,
+bázní obtížená,
+ta oběť krvavá za tě je zjevená.
+Před trůnem mou jsi jistotou,
+před trůnem mou jsi jistotou,
+mé jméno je na Tvých rukou.</lines>
+    </verse>
+    <verse name="v2">
+      <lines>Pán věčně živý je,
+za mě se přimlouvá,
+On mě vykupuje a drahá krev volá.
+Můj hřích Jeho krev obmývá,
+můj hřích jeho krev obmývá a před trůnem se přimlouvá.</lines>
+    </verse>
+    <verse name="v3a">
+      <lines>Pět nese ranění na kříži golgotském,
+za mě orodují ve lkání přímluvném.
+"Ó odpusť,
+odpusť!</lines>
+    </verse>
+    <verse name="v3b">
+      <lines>" volají,
+"ó odpusť,
+odpusť!
+" volají a nech vykoupeného žít.</lines>
+    </verse>
+    <verse name="v4">
+      <lines>Slyší Otec volat Jej Pomazaného,
+nemůže odmítat žádost Syna Jeho.
+Duch Jeho na krev odpoví,
+Duch Jeho na krev odpoví,
+dí mi: "Jsi z  Boha zrozený.
+"</lines>
+    </verse>
+    <verse name="v5">
+      <lines>Jsem nyní smířeným a Boží hlas slyším,
+jsem dítětem drahým a víc se nebojím.
+S jistotou k Němu přicházím,
+s jistotou k Němu přicházím,
+Abba,
+Otče,
+buď navždy mým.</lines>
+    </verse>
+  </lyrics>
+</song>

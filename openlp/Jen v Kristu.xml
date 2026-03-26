@@ -1,0 +1,65 @@
+<?xml version="1.0" ?>
+<song xmlns="http://openlyrics.info/namespace/2009/song" version="0.8">
+  <properties>
+    <titles>
+      <title>Jen v Kristu</title>
+    </titles>
+    <authors>
+      <author>Keith Getty
+Stuart Townend</author>
+      <author>Přeložil Ladislav Štěpán
+překlad upravil Petr Stoklasa</author>
+    </authors>
+    <verseOrder>v1a v1b v2a v2b v3a v3b v4</verseOrder>
+  </properties>
+  <lyrics>
+    <verse name="v1a">
+      <lines>Jen v Kristu mám naději svou,
+je světlem mým i písní mou.
+Ta pevná zem,
+ta skála skal,
+v žáru i bouři úkryt mám.</lines>
+    </verse>
+    <verse name="v1b">
+      <lines>Jen pokoj Tvůj,
+jen láska Tvá,
+jen ta můj strach vždy přemáhá.
+Zachránce můj,
+v něm všechno mám,
+v Kristově lásce smím tu stát.</lines>
+    </verse>
+    <verse name="v2a">
+      <lines>On tělo sám na sebe vzal,
+by spasitelem nám se stal.
+Ten lásky dar byl popliván těmi,
+jimž byl ke spáse dán.</lines>
+    </verse>
+    <verse name="v2b">
+      <lines>Své smrti kříž On musel nést,
+tak usmířen byl Boží hněv.
+Když každý hřích na sebe vzal,
+v Kristově smrti smím tu stát.</lines>
+    </verse>
+    <verse name="v3a">
+      <lines>Ve skále Jeho tělo dlí,
+mocnostmi temna zabitý.
+Však přišel zlom v den vítězný,
+když z hrobu vstal byl vzkříšený.</lines>
+    </verse>
+    <verse name="v3b">
+      <lines>Tak zvítězil nad hříchem vším,
+svou obětí mě zbavil vin.
+Vím,
+On je mům a já jsem s ním.
+Kristova krev mi dává žít.</lines>
+    </verse>
+    <verse name="v4">
+      <lines>Teď klid a mír v svém srdci mám,
+vždyť ve mě Kristus vládne sám.
+Od Prvních chvil do konce dní Ježíš je stále Pánem mým.
+A žádná moc či lidský hřích mě nemůžou vzít z rukoou tvých.
+Než zazní hlas Než přijde k
+nám v Kristově síle smím tu stát.</lines>
+    </verse>
+  </lyrics>
+</song>

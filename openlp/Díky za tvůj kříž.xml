@@ -1,0 +1,57 @@
+<?xml version="1.0" ?>
+<song xmlns="http://openlyrics.info/namespace/2009/song" version="0.8">
+  <properties>
+    <titles>
+      <title>Déky za tvůj kříž</title>
+    </titles>
+    <authors>
+      <author>Neznámý autor</author>
+    </authors>
+    <verseOrder>v1a v1b v1c v2a v2b</verseOrder>
+  </properties>
+  <lyrics>
+    <verse name="v1a">
+      <lines>Díky za Tvůj kříž,
+jež nás vykoupil,
+když ses nám vydal cele do rukou,
+ó,
+Pane náš,
+ó Pane náš.</lines>
+    </verse>
+    <verse name="v1b">
+      <lines>Naše skutky zlé Ty's nám odpustil,
+přikryl krví svou,
+na vše zapomněl,
+děkuji,
+děkuji.</lines>
+    </verse>
+    <verse name="v1c">
+      <lines>Pane,
+mámtě rád,
+vážně mám tě rád,
+stále poznávám,
+že Ty,
+miluješ nás,
+hlubokou radostí těšíš srdce mé,
+ale největší je to,
+že mohu znát Tvou lásku znát.</lines>
+    </verse>
+    <verse name="v2a">
+      <lines>Pro mé nemoci trpěl's,
+Pane náš,
+abys vzal náš strach lásku vyléváš,
+ó,
+Pane náš,
+ó,
+Pane náš.</lines>
+    </verse>
+    <verse name="v2b">
+      <lines>Skončil úkol Tvůj,
+Tvé je vítězství,
+teď nám dáváš růst,
+z vody živé pít,
+děkuji,
+děkuji.</lines>
+    </verse>
+  </lyrics>
+</song>

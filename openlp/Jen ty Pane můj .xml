@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+<song xmlns="http://openlyrics.info/namespace/2009/song" version="0.8">
+  <properties>
+    <titles>
+      <title>Jen ty Pane můj </title>
+    </titles>
+    <authors>
+      <author>Neznámý autor</author>
+    </authors>
+    <verseOrder>v1a v1b v2 v3 v4</verseOrder>
+  </properties>
+  <lyrics>
+    <verse name="v1a">
+      <lines>Jen Ty,
+Pane můj,
+jen Ty's můj štít,
+má sláva,
+Ty mou hlavu pozvedáš.</lines>
+    </verse>
+    <verse name="v1b">
+      <lines>Jen dáš.
+Mnoho je těch,
+kteří kolem volají: "V Bohu žádnou pomoc nenajdeš.
+" deš.
+" Jen</lines>
+    </verse>
+    <verse name="v2">
+      <lines>Volal jsem k Pánu svému v úzkosti a On prosbu moji vyslyšel.
+šel.</lines>
+    </verse>
+    <verse name="v3">
+      <lines>Ty mi dáváš spánek,
+novou sílu,
+v novém dni mne znovu podpíráš.
+ráš.</lines>
+    </verse>
+    <verse name="v4">
+      <lines>Nebudu se bát ani tisíců těch,
+kteří mne pronásledují.
+jí.</lines>
+    </verse>
+  </lyrics>
+</song>

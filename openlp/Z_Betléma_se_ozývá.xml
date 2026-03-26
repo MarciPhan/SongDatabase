@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<song xmlns="http://openlyrics.info/namespace/2009/song" version="0.8">
+  <properties>
+    <titles>
+      <title>Z Betléma se ozývá</title>
+    </titles>
+    <authors>
+      <author>D. Vančura</author>
+      <author>úprava a text: D. Vančura</author>
+    </authors>
+    <verseOrder>v1a v1b v1c v1d v2</verseOrder>
+  </properties>
+  <lyrics>
+    <verse name="v1a">
+      <lines>Jaké divné světlo s hůry na zem slétlo nám narodil se Pán
+vchlévě panna čistá porodila Krista nám narodil se Pán Kopyta koní písek víří.
+jak se zpráva šíří nám narodil se Pán.
+od Mrtvého moře zní k Olivetské hoře: nám narodil se Pán.</lines>
+    </verse>
+    <verse name="v1b">
+      <lines>Z Betléma se ozývá halelu,
+haleluja!
+Z Betléma se ozývá,
+nám narodil se Pán.</lines>
+    </verse>
+    <verse name="v1c">
+      <lines>Pán.
+Pastýři volivovém háji na šalmaje
+je hrají nám narodil se Pán,
+zatím co vNazaretu městě vy hrávají žestě nám narodil se,
+nám všem narodil se Z Betléma se ozývá halelu,
+haleluja!</lines>
+    </verse>
+    <verse name="v1d">
+      <lines>Z Betléma se ozývá,
+nám narodil se Pán.
+nám narodil se,
+Glo ry halelu ja!
+nám narodil se Pán!</lines>
+    </verse>
+    <verse name="v2">
+      <lines>ZVýchodu přebohatí pánni dí těti
+se klaní nám narodil se Pán,
+poutníci obutí i bosí kjes lím dary nosí,
+nám narodil se,
+nám všem narodil se</lines>
+    </verse>
+  </lyrics>
+</song>

@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<song xmlns="http://openlyrics.info/namespace/2009/song" version="0.8">
+  <properties>
+    <titles>
+      <title>Zjev se nám</title>
+    </titles>
+    <authors>
+      <author>Doug Plank</author>
+      <author>Doug Plank a Bob Kauflin</author>
+      <author>Doug Plank, Bob Kauflin</author>
+    </authors>
+    <verseOrder>v1a v1b v1c v2</verseOrder>
+  </properties>
+  <lyrics>
+    <verse name="v1a">
+      <lines>Připrav Otče,
+mé srdce,
+pýchu hořkost zlom,
+víry mě vysvoboď,
+k slyšení vystroj.</lines>
+    </verse>
+    <verse name="v1b">
+      <lines>Tvé slovo v srdce zasévej,
+sám mu dávej vzrůst,
+uši,
+oči otvírej,
+k poslušnosti vzbuď.</lines>
+    </verse>
+    <verse name="v1c">
+      <lines>Zjev  se nám,
+v Kristu nám se zjev.
+Chce me vidět Tvoji slávu,
+ve Tvém slově v kázání,
+aby každý vyznal Krista On je Pán.
+Kam jen máme jít Pane,
+kam  jen  má me jít?
+Ty  slova věčného života máš.</lines>
+    </verse>
+    <verse name="v2">
+      <lines>Slovo jako louče svit září v temnotách,
+z pokušení cestu zná,
+prostým moudrost dá.
+Tvé slovo hladové sytí,
+svobodu dává,
+z chudých bohaté číní dej,
+ať promlouvá.</lines>
+    </verse>
+  </lyrics>
+</song>

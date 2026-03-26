@@ -1,0 +1,56 @@
+<?xml version="1.0" ?>
+<song xmlns="http://openlyrics.info/namespace/2009/song" version="0.8">
+  <properties>
+    <titles>
+      <title>Buď mojí Vizí</title>
+    </titles>
+    <authors>
+      <author>Přeložil Petr Stoklasa</author>
+      <author>Tradiční Irský hymnus z 8. stol.</author>
+    </authors>
+    <verseOrder>v1 v2 v3 v4 v5</verseOrder>
+  </properties>
+  <lyrics>
+    <verse name="v1">
+      <lines>Buď moji vizí,
+Ty's Pán v srdci mém.
+Kéž nic mi milejší než jméno Tvé.
+Nejlepší nač myslím ať nocí či dnem.
+Bdímli či spím,
+jsi dál mým průvodcem.</lines>
+    </verse>
+    <verse name="v2">
+      <lines>Buď moje moudrost,
+buď pravda slov mých.
+Kéž chodím s Tebou,
+vždyť nade mnou bdíš.
+Z milosti Tvé jsem královský syn.
+V srdci mém přebýváš a i já v Tobě dlím.</lines>
+    </verse>
+    <verse name="v3">
+      <lines>Buď Ty mým štítem,
+buď ostřím v Tvůj boj.
+Buď moji zbrojí,
+svou silou mne stroj.
+Duši mou chráníš jak tvrz nezdolná.
+Zdvihni mne k nebesům,
+jen Ty jsi síla má.</lines>
+    </verse>
+    <verse name="v4">
+      <lines>Bohatství nedbám,
+ni z lidských úst chval.
+Dědictvím mým jsi,
+vždyť sklonil ses k nám.
+Jezu můj Pane Ty zveš mě teď svým.
+Králi můj v nebesích stal ses pokladem mým.</lines>
+    </verse>
+    <verse name="v5">
+      <lines>Nebeský králi,
+až skončí boj můj,
+uveď mne k sobě,
+před svatý trůn Tvůj.
+Kdybych měl život svůj pro Krista dát,
+zůstaň mou vizí ať tak učiním rád.</lines>
+    </verse>
+  </lyrics>
+</song>

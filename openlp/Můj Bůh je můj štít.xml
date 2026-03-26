@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<song xmlns="http://openlyrics.info/namespace/2009/song" version="0.8">
+  <properties>
+    <titles>
+      <title>Můj Bůh je můj štít</title>
+    </titles>
+    <authors>
+      <author>Frank Gallio</author>
+      <author>přeložil Karel Řežábek</author>
+    </authors>
+    <verseOrder>v1a v1b</verseOrder>
+  </properties>
+  <lyrics>
+    <verse name="v1a">
+      <lines>Můj Bůh je můj štít,
+je mou písní,
+já vím,
+On mi odpoví a mocí svého jména vysvobodí.</lines>
+    </verse>
+    <verse name="v1b">
+      <lines>dí.
+Chci žít ve stínu křídel Tvých,
+spěchám do stínu křídel Tvých,
+smím žít ve stínu křídel Tvých.
+Teď smím jít v pokoji dál,
+vím,
+že jsi mi blízko Halelujah.</lines>
+    </verse>
+  </lyrics>
+</song>

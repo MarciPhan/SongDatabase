@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<song xmlns="http://openlyrics.info/namespace/2009/song" version="0.8">
+  <properties>
+    <titles>
+      <title>Přišel na zem</title>
+    </titles>
+    <authors>
+      <author>Neznámý autor</author>
+    </authors>
+    <verseOrder>v1a v1b v1c v1d v2</verseOrder>
+  </properties>
+  <lyrics>
+    <verse name="v1a">
+      <lines>Přišel na zem konat dílo spásy
+a lidem bídným s láskou pomáhal,
+ke svobodě zval zotročené hříchem,
+můj Pán.</lines>
+    </verse>
+    <verse name="v1b">
+      <lines>Světem šel a lidskou nesl bídu,
+byl bičován a na smrt odsouzen,
+na kříži mřel,
+však třetí den vstal,
+z hrobu,
+můj Pán.</lines>
+    </verse>
+    <verse name="v1c">
+      <lines>Ježíš,
+můj Pán,
+mne miloval,
+až na smrt šel,
+mé hříchy sňal.</lines>
+    </verse>
+    <verse name="v1d">
+      <lines>Ježíš,
+můj Pán,
+dnes tebe zve: "Pojď domů,
+vrať se zpět.
+"</lines>
+    </verse>
+    <verse name="v2">
+      <lines>Jeho láska stále rány hojí a otvírá ke spáse náruč svou,
+dnes jako dřív hned bouři upokojí,
+můj Pán.
+Jeho milost stále ještě trvá,
+chce smířit lidi s Bohem,
+Otcem svým,
+krev svoji dal na soud za vykoupení,
+můj Pán.</lines>
+    </verse>
+  </lyrics>
+</song>

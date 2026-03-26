@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+<song xmlns="http://openlyrics.info/namespace/2009/song" version="0.8">
+  <properties>
+    <titles>
+      <title>Chvalte, služebníci</title>
+    </titles>
+    <authors>
+      <author>Karel Řežábek, Milan Koldinský</author>
+      <author>Milan Koldinský</author>
+      <author>: Karel Řežábek, Milan Koldinský 1988  hudba: Milan Koldinský 1988</author>
+    </authors>
+    <verseOrder>c1 v2 v3 v4 v5 v6 v7 v8</verseOrder>
+  </properties>
+  <lyrics>
+    <verse name="c1">
+      <lines>Chvalte služebníci chvalte Hospodina jméno Jeho,
+haleluja.
+Chvalte služeb1.
+Tam,
+kde zní pláč srdcí zraněných,
+Bůh  posílá slovo Své.</lines>
+    </verse>
+    <verse name="v2">
+      <lines>Pán volá nás,
+k sobě na Sijón,
+kde přebývá ve slávě Své.</lines>
+    </verse>
+    <verse name="v3">
+      <lines>Duch Svatý sám padl na Sijón,
+teď hoří v nás oheň Tvůj.</lines>
+    </verse>
+    <verse name="v4">
+      <lines>Vím,
+městem tím proudí milost Tvá,
+pro žíznivé dost vody má.</lines>
+    </verse>
+    <verse name="v5">
+      <lines>Tam děti Tvé tančí radostí,
+o jménu Tvém zpívají.</lines>
+    </verse>
+    <verse name="v6">
+      <lines>Kéž Boží lid slavně vítězí,
+vlož ruku svou na Sijón.</lines>
+    </verse>
+    <verse name="v7">
+      <lines>Bůh otvírá stále náruč svou.
+On přichází na Sijón.</lines>
+    </verse>
+    <verse name="v8">
+      <lines>Bůh pro svůj lid žehná celou zem,
+pokoj ať má Jeruzalém.</lines>
+    </verse>
+  </lyrics>
+</song>

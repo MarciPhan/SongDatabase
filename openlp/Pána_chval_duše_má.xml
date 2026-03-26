@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+<song xmlns="http://openlyrics.info/namespace/2009/song" version="0.8">
+  <properties>
+    <titles>
+      <title>Title</title>
+    </titles>
+    <authors>
+      <author>Composer</author>
+      <author>Matt Redman, Jonas Myrin</author>
+    </authors>
+    <verseOrder>v1a v1b v2 v3</verseOrder>
+  </properties>
+  <lyrics>
+    <verse name="v1a">
+      <lines>Pá na chval du  še má,
+ó du  še má Ve   leb  Ho   víc,
+než dřív.
+On   Svaté jmé no má,
+jmé   no má.</lines>
+    </verse>
+    <verse name="v1b">
+      <lines>Veleb Ho víc,
+než dřív.
+Když sví táním no vý den se hlá sí,
+zas je tu čas s no  vou pí sní vstát.
+Ať bude tento den všední nebo něčím zvláštní,
+kéž ještě večer moje pí seň zní.</lines>
+    </verse>
+    <verse name="v2">
+      <lines>Tvá lá ska k nám často hněv odklá dá.
+Jsi nejvyšší,
+přesto soucit máš.
+O do brodiní Tvém v srdci stá le zpí  vám.
+Mám tisíc důvodů Ti chvá  lu vzdát.</lines>
+    </verse>
+    <verse name="v3">
+      <lines>Až přijde den Tvé ho zúčtování,
+na konci sil,
+když se blíží můj čas.
+Má duše nepřestane Tebe dál chvá  lit,
+po tisíc let a potom napořád.</lines>
+    </verse>
+  </lyrics>
+</song>

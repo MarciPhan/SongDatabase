@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<song xmlns="http://openlyrics.info/namespace/2009/song" version="0.8">
+  <properties>
+    <titles>
+      <title>Láskou získals duši mou</title>
+    </titles>
+    <authors>
+      <author>Paul Oakley</author>
+      <author>:
+Daniel Němec
+Tomáš Coufal</author>
+    </authors>
+    <verseOrder>v1a v1b v1c</verseOrder>
+  </properties>
+  <lyrics>
+    <verse name="v1a">
+      <lines>Láskou získals duši mou,
+spalující žár je v očích Tvých.
+Toužím jít vždy za Tebou,
+Ježíši můj,
+ve Tvých šlépějích.</lines>
+    </verse>
+    <verse name="v1b">
+      <lines>Vždyť není nikdo v dějinách tak úžasný,
+dějiny jen Tobě náleží.
+Alfo i Omego pro Tvou lásku
+smím navždy zůstat ve Tvém náručí.</lines>
+    </verse>
+    <verse name="v1c">
+      <lines>Vždyť všechno je Tvé,
+Králi,
+jen Ty jsi tu hlavní,
+Tobě sláva náleží.
+A kdopak jsem já,
+abys poslouchat mě musel?
+Jen Ty sám jsi Bůh a já se řídím vůlí Tvou.</lines>
+    </verse>
+  </lyrics>
+</song>

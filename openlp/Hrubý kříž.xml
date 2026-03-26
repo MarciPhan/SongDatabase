@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<song xmlns="http://openlyrics.info/namespace/2009/song" version="0.8">
+  <properties>
+    <titles>
+      <title>Hrubý kříž</title>
+    </titles>
+    <authors>
+      <author>Neznámý autor</author>
+    </authors>
+    <verseOrder>v1a v1b v2 v3 v4</verseOrder>
+  </properties>
+  <lyrics>
+    <verse name="v1a">
+      <lines>Na vrchu vzdáleném,
+tam kdys kříž hrubý stál,
+to znamení hanby a běd.
+A já miluji jej,
+neb tam svůj život dal můj Pán,
+jenž mne z hříchů mých zved.</lines>
+    </verse>
+    <verse name="v1b">
+      <lines>Proto miluji hrubý ten kříž,
+dokud žití mi trvá zde čas.
+Nikdy nepustím hrubý ten kříž,
+až jej zaměním v koruny jas.</lines>
+    </verse>
+    <verse name="v2">
+      <lines>Starý ten hrubý kříž,
+jímž tak pohrdá svět,
+vždy předivnou má pro mne moc.
+Neboť pro něho Pán opustil slávu svou,
+by vnesl ji v Golgaty moc.</lines>
+    </verse>
+    <verse name="v3">
+      <lines>V hrubém já kříži tom,
+svatá kde tekla krev,
+tak předivnou krásu vždy zřím.
+Neboť na kříži tom,
+Ježíš trpěl a mřel,
+by smíříl mne zas s Otcem svým.</lines>
+    </verse>
+    <verse name="v4">
+      <lines>Tomu kříži já chci na věky věrný být,
+rád pohanu jeho chci nést.
+Pak mě Pán zavolá v nebeský domov svůj,
+bych sdílel s ním slávu a čest.</lines>
+    </verse>
+  </lyrics>
+</song>

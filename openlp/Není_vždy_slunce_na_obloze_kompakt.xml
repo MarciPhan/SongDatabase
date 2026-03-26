@@ -1,0 +1,76 @@
+<?xml version="1.0" ?>
+<song xmlns="http://openlyrics.info/namespace/2009/song" version="0.8">
+  <properties>
+    <titles>
+      <title>Není vždy slunce na obloze</title>
+    </titles>
+    <authors>
+      <author>Mária Viesnerová</author>
+      <author>Patricie Hurtová</author>
+    </authors>
+    <verseOrder>v1 v2a v2b v3a v3b v4a v4b</verseOrder>
+  </properties>
+  <lyrics>
+    <verse name="v1">
+      <lines>Není vždy slunce na obloze,
+nejsou vždy květy rozkvetlé,
+Není vždy pokoj,
+láska v domě,
+ne vždy Tě vidím,
+cítím,
+Pane.</lines>
+    </verse>
+    <verse name="v2a">
+      <lines>Nemám vždy lásku k lidem,
+Bože,
+neotvírám jim vždy své dlaně,
+nedávám Ti vždy ruce svoje,
+nedobojoval jsem vždy boje.</lines>
+    </verse>
+    <verse name="v2b">
+      <lines>Ale vždy vím,
+že Ty jsi se mnou,
+já vím,
+jak moc mě máš rád,
+to vím,
+jsi stále tentýž,
+včera,
+zítra,
+dnes!
+Ale vždy</lines>
+    </verse>
+    <verse name="v3a">
+      <lines>Jsou někdy na obloze mraky,
+to kvůli děšti jinak nejde,
+však slunce za nimi je taky,
+když chvíli počkáš zase vyjde.</lines>
+    </verse>
+    <verse name="v3b">
+      <lines>vím,
+že měníš srdce,
+já vím,
+jsi mojí silou,
+to vím,
+jdu k Tobě,
+Otče,
+Tobě patřit smím.
+Dnes už to</lines>
+    </verse>
+    <verse name="v4a">
+      <lines>A že se světlo v noci ztratí,
+neznamená,
+že slunce není,
+vím dobře,
+že se ráno vrátí a to je pro mě povzbuzení.</lines>
+    </verse>
+    <verse name="v4b">
+      <lines>Stejně tak vím,
+Ty jsi ten vítěz,
+já vím,
+Golgotský vítěz,
+to vím,
+jsi Ježíš Kristus,
+Tobě náležím.</lines>
+    </verse>
+  </lyrics>
+</song>

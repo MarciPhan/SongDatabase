@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<song xmlns="http://openlyrics.info/namespace/2009/song" version="0.8">
+  <properties>
+    <titles>
+      <title>Otče můj drahý</title>
+    </titles>
+    <authors>
+      <author>Jiřina Markovová</author>
+    </authors>
+    <verseOrder>v1a v1b v2</verseOrder>
+  </properties>
+  <lyrics>
+    <verse name="v1a">
+      <lines>Otče můj drahý,
+svaté je jméno Tvé,
+kéž je zjevná Tvoje sláva na zemi.
+mi,
+můj nejvyšší.</lines>
+    </verse>
+    <verse name="v1b">
+      <lines>Buď vůle Tvá na nebi,
+buď vůle Tvá na zemi,
+buď vůle Tvá v životě mém Ježíši.
+Buď vůle tvá v životě mém Ježíši,
+můj nejvyšší.</lines>
+    </verse>
+    <verse name="v2">
+      <lines>Ježíš,
+ó Ježíš,
+v Jeho jménu je moc,
+kéž je zjevná Jeho sláva na zemi.
+mi,
+můj nejvyšší.</lines>
+    </verse>
+  </lyrics>
+</song>

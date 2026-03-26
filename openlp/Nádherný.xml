@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<song xmlns="http://openlyrics.info/namespace/2009/song" version="0.8">
+  <properties>
+    <titles>
+      <title>Nádherný</title>
+    </titles>
+    <authors>
+      <author>Bob Hartman</author>
+      <author>Bob Hartman
+přeložil Marek Čevela</author>
+      <author>Bob Hartman přeložil marek Čevela</author>
+    </authors>
+    <verseOrder>v1 v2 v3</verseOrder>
+  </properties>
+  <lyrics>
+    <verse name="v1">
+      <lines>Ve Tvém srdci je soucit a slitování,
+prapor lásky Tvé nade mnou.
+S Tebou setkat se toužím tváří v tvář navždy v blízkosti Tvé pak stát jak je nádherné víc Tě znát Nádherný
+pro mě vším jsi sám nádherný čistý můj jsi Pán hoden jsi slávy jsi králů Král jak je nádherné víc Tě znát,
+jak je nádherné víc Tě znát.</lines>
+    </verse>
+    <verse name="v2">
+      <lines>Ve Tvých rukou je právo jsi spravedlivý,
+jas Tvé tváře jak úsvit nade mnou.
+Ty jsi stvořitel Bůh,
+mého života Pán,
+Tobě chválu a díky vzdám jak je nádherné víc Tě znát</lines>
+    </verse>
+    <verse name="v3">
+      <lines>Budem chválit Tvé jméno ať svaté je
+v nás Tebe chválit a vzívat budem dál.
+Ve Tvé moci a slávě chcem navěěky žít v srdci
+vděčnost a lásku mít jak je nádherné blíž Ti být.</lines>
+    </verse>
+  </lyrics>
+</song>

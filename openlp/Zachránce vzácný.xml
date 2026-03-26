@@ -1,0 +1,56 @@
+<?xml version="1.0" ?>
+<song xmlns="http://openlyrics.info/namespace/2009/song" version="0.8">
+  <properties>
+    <titles>
+      <title>Zachánce vzácný</title>
+    </titles>
+    <authors>
+      <author>Mark Hall, Bernie Herms</author>
+      <author>Ladislav Štěpán</author>
+    </authors>
+    <verseOrder>v1a v1b v2 v3a v3b</verseOrder>
+  </properties>
+  <lyrics>
+    <verse name="v1a">
+      <lines>Muž vzhůru kráčel,
+šel Golgotou,
+On hříchů vzdálen vzal vinu mou.
+Tak velká láska,
+tak hrozný kříž,
+Ježíš,
+má spása,
+věčně smím žít.</lines>
+    </verse>
+    <verse name="v1b">
+      <lines>Zachránce vzácný,
+mocný král slávy,
+vidím jak stoupá na Golgotský kříž.
+Bolestí svírán,
+tupen a týrán,
+to za mé chříchy smrti je blíž.</lines>
+    </verse>
+    <verse name="v2">
+      <lines>Odpusť jim Otče,
+modlil se tmou,
+i když vyléval svou krev přesvatou.
+Za nás,
+za hříšné z kříže hlas zněl,
+kdo větší lásku než Ježíš měl.</lines>
+    </verse>
+    <verse name="v3a">
+      <lines>Ty jsi mou láskou,
+zachráncem mým,
+mé chvály proudí před trůnem Tvým.
+Věčností toužím jen s Tebou jít,
+vždy píseň díků v srdci svém mít.</lines>
+    </verse>
+    <verse name="v3b">
+      <lines>Beránek vzácný,
+hoden je slávy,
+za naše hříchy sám podstoupil kříž.
+Bůh trestem jej stíhal,
+když za mě umíral,
+pro jeho lásku Bohu jsem blíž.</lines>
+    </verse>
+  </lyrics>
+</song>

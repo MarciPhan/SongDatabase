@@ -1,0 +1,68 @@
+<?xml version="1.0" ?>
+<song xmlns="http://openlyrics.info/namespace/2009/song" version="0.8">
+  <properties>
+    <titles>
+      <title>Sláva Ti patří</title>
+    </titles>
+    <authors>
+      <author>Ed Cash</author>
+      <author>Ed Cash, přel. Tomáš Coufal</author>
+      <author>Vicky Beeching</author>
+    </authors>
+    <verseOrder>v1a v1b v1c v1d v1e v2a v2b</verseOrder>
+  </properties>
+  <lyrics>
+    <verse name="v1a">
+      <lines>Přišel Bůh a život za mě dal,
+amen,
+men,
+aamen.</lines>
+    </verse>
+    <verse name="v1b">
+      <lines>men.
+Svým tělem,
+krví vítězem se stal,
+amen,
+amen.</lines>
+    </verse>
+    <verse name="v1c">
+      <lines>Na kříži mřel,
+pak vzkříšen byl,
+amen,
+amen.</lines>
+    </verse>
+    <verse name="v1d">
+      <lines>Po pravici Otce vládne dál,
+amen amen.
+Sláva Ti patří,
+Ty jsi Bůh vždy mocný Sláva Ti patří Ty jsi Pán.</lines>
+    </verse>
+    <verse name="v1e">
+      <lines>Tobě celým srdcem zpívám,
+že jsi Bůh vždy mocný,
+velká je sláva Tvá 2.
+Krev Ty jsi ten,
+který byl,
+Ty jsi ten,
+který je,
+Ty jsi ten,
+co se vrátí k nám Ty jsi ten,
+který byl Ty jsi ten,
+který je Ty jsi ten,
+co se vrá tí k nám.</lines>
+    </verse>
+    <verse name="v2a">
+      <lines>rudá tekla z rukou bezhříšných,
+amen amen.
+Však nezůstal tam viset na kříži,
+amen amen.</lines>
+    </verse>
+    <verse name="v2b">
+      <lines>Boží lásky proud teď smáčí nás,
+amen amen.
+Haleluja,
+on se vrátí zas,
+amen amen.</lines>
+    </verse>
+  </lyrics>
+</song>

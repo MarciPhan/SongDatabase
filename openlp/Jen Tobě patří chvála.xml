@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+<song xmlns="http://openlyrics.info/namespace/2009/song" version="0.8">
+  <properties>
+    <titles>
+      <title>Jen Tobě patří chvála</title>
+    </titles>
+    <authors>
+      <author>Ondřej Halama</author>
+    </authors>
+    <verseOrder>v1a v1b</verseOrder>
+  </properties>
+  <lyrics>
+    <verse name="v1a">
+      <lines>Jen Tobě patří chvála,
+tak Tě chválím,
+uctívám.
+Vše,
+co mám,
+jen Ty mi dáváš,
+to nejlepší je,
+že Tě znám.</lines>
+    </verse>
+    <verse name="v1b">
+      <lines>znám.
+Chválím Tvé svaté jméno,
+hledám Tvou svatou tvář,
+před Tebou otvírám srdce své,
+Ty sám mne znáš.</lines>
+    </verse>
+  </lyrics>
+</song>

@@ -1,0 +1,868 @@
+/* ========================================= */
+/* 1. RESET & BASE                           */
+/* ========================================= */
+*,
+*::before,
+*::after {
+    box-sizing: border-box
+}
+
+* {
+    margin: 0;
+    padding: 0
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%
+}
+
+body {
+    background: #f5f5f7;
+    color: #1d1d1f;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    min-height: 100vh;
+    padding-bottom: 50px;
+    line-height: 1.4;
+    /* Kompaktnější řádkování */
+}
+
+/* HEADER */
+.site-header {
+    background: #d11a2a;
+    color: #fff;
+    padding: 15px 20px;
+    /* Menší padding */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .1);
+    margin-bottom: 20px;
+}
+
+.site-header .title {
+    font-weight: 700;
+    font-size: 22px;
+    text-align: center
+}
+
+/* CONTAINER */
+.wrap {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* ========================================= */
+/* 2. LAYOUT & CARDS                         */
+/* ========================================= */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 800px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.card {
+    background: #fff;
+    border-radius: 16px;
+    /* Jemnější radius */
+    padding: 20px;
+    /* Menší padding */
+    border: 1px solid #e5e5e7;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+    margin-bottom: 15px;
+}
+
+.panel-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #1d1d1f;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 10px;
+}
+
+/* ========================================= */
+/* 3. BUTTONS                                */
+/* ========================================= */
+.action-btn-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.big-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    background: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    font-weight: 600;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+    min-height: 90px;
+}
+
+.big-btn span {
+    font-size: 24px;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.big-btn:hover {
+    border-color: #d11a2a;
+    color: #d11a2a;
+    background: #fff;
+    transform: translateY(-1px);
+}
+
+.big-btn.primary {
+    background: #d11a2a;
+    color: #fff;
+    border-color: #d11a2a;
+}
+
+.big-btn.primary:hover {
+    background: #b81624;
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    border: none;
+    background: #d11a2a;
+    color: #fff;
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .2s;
+    text-align: center;
+}
+
+.btn:hover {
+    background: #b81624;
+}
+
+.btn-secondary {
+    background: #f5f5f7;
+    color: #333;
+    border: 1px solid #d2d2d7;
+}
+
+.btn-secondary:hover {
+    background: #e5e5e7;
+}
+
+.btn-danger {
+    background: #fff;
+    color: #d11a2a;
+    border: 1px solid #d11a2a;
+}
+
+/* ========================================= */
+/* 4. FORMS & INPUTS                         */
+/* ========================================= */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-label {
+    display: block;
+    color: #333;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+input:not([type="checkbox"]),
+select {
+    width: 100%;
+    border: 1px solid #d2d2d7;
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 15px;
+    outline: none;
+    background: #fff;
+    transition: border-color .2s;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+select {
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px top 50%;
+    background-size: 10px auto;
+    padding-right: 35px;
+    cursor: pointer;
+}
+
+input:focus,
+select:focus {
+    border-color: #d11a2a;
+}
+
+/* TABULKA (Kompaktnější) */
+.table-wrapper {
+    overflow-x: auto;
+    border: 1px solid #e5e5e7;
+    border-radius: 12px;
+    margin-top: 15px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    min-width: 650px;
+}
+
+th,
+td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+th {
+    background: #fcfcfc;
+    font-weight: 600;
+    color: #555;
+    cursor: pointer;
+    white-space: nowrap;
+    user-select: none;
+    border-bottom: 2px solid #eee;
+}
+
+th:hover {
+    color: #d11a2a;
+    background: #f5f5f5;
+}
+
+.row-red {
+    background: #fff5f5;
+}
+
+.songRow.selected {
+    background: #ffebeb !important;
+}
+
+/* Tagy */
+.tag-badge {
+    display: inline-block;
+    background: #eef1f5;
+    color: #555;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 11px;
+    margin-right: 4px;
+    border: 1px solid #ddd;
+}
+
+/* ========================================= */
+/* 5. MODALS                                 */
+/* ========================================= */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+}
+
+.modal-content {
+    background: #fff;
+    width: 100%;
+    max-width: 480px;
+    max-height: 90vh;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: modalFadeIn 0.25s ease-out;
+}
+
+.modal-content.large {
+    max-width: 650px;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.modal-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+}
+
+.modal-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #333;
+    margin: 0;
+}
+
+.close-btn {
+    font-size: 24px;
+    color: #bbb;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s;
+}
+
+.close-btn:hover {
+    color: #d11a2a;
+}
+
+.modal-body {
+    padding: 20px;
+    overflow-y: auto;
+}
+
+/* Footer je volitelný, některé modaly ho nemají */
+.modal-footer {
+    padding: 15px 20px;
+    background: #fcfcfc;
+    text-align: right;
+    border-top: 1px solid #f0f0f0;
+}
+
+/* ========================================= */
+/* 6. STATS & HISTORY STYLE FIXES            */
+/* ========================================= */
+
+/* Kompaktní statistiky v modalu */
+.stats-compact-row {
+    display: flex;
+    background: #f9f9f9;
+    border-radius: 12px;
+    border: 1px solid #eee;
+    padding: 15px;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-val {
+    font-size: 24px;
+    font-weight: 800;
+    color: #d11a2a;
+    display: block;
+    line-height: 1.2;
+}
+
+.stat-lbl {
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #888;
+    letter-spacing: 0.5px;
+}
+
+/* Historie - Seznam */
+.history-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f5f5f5;
+    font-size: 14px;
+}
+
+.history-item:last-child {
+    border-bottom: none;
+}
+
+.h-date {
+    font-weight: 600;
+    color: #333;
+    width: 100px;
+    font-family: monospace;
+}
+
+.h-name {
+    flex: 1;
+    color: #555;
+}
+
+.h-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.icon-btn {
+    border: none;
+    background: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 4px;
+    border-radius: 4px;
+    color: #999;
+    transition: all 0.2s;
+}
+
+.icon-btn:hover {
+    color: #d11a2a;
+    background: #fff5f5;
+}
+
+/* Zapomenuté písně */
+#neglectedContainer {
+    max-height: 250px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 100%;
+}
+
+.neglected-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    border-bottom: 1px solid #f0f0f0;
+    padding: 10px 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.neglected-card:last-child {
+    border-bottom: none;
+}
+
+.neglected-info b {
+    display: block;
+    font-size: 14px;
+    color: #333;
+}
+
+.neglected-info small {
+    color: #888;
+    font-size: 12px;
+}
+
+.neglected-date {
+    color: #d11a2a;
+    font-weight: 600;
+    font-size: 12px;
+    background: #fff0f1;
+    padding: 2px 8px;
+    border-radius: 10px;
+    white-space: nowrap;
+}
+
+/* Chips History (Editace) */
+.history-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.history-chip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: #f0f0f0;
+    border-radius: 15px;
+    padding: 4px 10px;
+    font-size: 13px;
+    color: #333;
+    border: 1px solid #e0e0e0;
+}
+
+.chip-remove {
+    color: #bbb;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 1;
+}
+
+.chip-remove:hover {
+    color: #d11a2a;
+}
+
+/* Dialogs */
+.ui-dialog-content {
+    text-align: center;
+    font-size: 16px;
+    color: #444;
+    margin-bottom: 20px;
+}
+
+.ui-dialog-btns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+/* Toast */
+#toast {
+    visibility: hidden;
+    min-width: 200px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 8px;
+    padding: 12px 20px;
+    position: fixed;
+    z-index: 10000;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+    font-size: 14px;
+    opacity: 0;
+    transition: all 0.3s;
+}
+
+#toast.show {
+    visibility: visible;
+    opacity: 1;
+    bottom: 50px;
+}
+
+#toast.error {
+    background-color: #d11a2a;
+}
+
+/* Footer */
+.site-footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+    border-top: 1px solid #f0f0f0;
+    color: #aaa;
+    font-size: 12px;
+}
+
+.version-hash {
+    font-family: monospace;
+    background: #f5f5f5;
+    color: #888;
+    padding: 2px 5px;
+    border-radius: 4px;
+    margin-left: 5px;
+}
+
+/* Hromadné akce lišta */
+.bulk-actions-bar {
+    background: #fff0f1;
+    border: 1px solid #d11a2a;
+    border-radius: 12px;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 12px rgba(209, 26, 42, 0.1);
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.songCheckbox {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: #d11a2a;
+}
+
+#selectAllSongs {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: #d11a2a;
+}
+
+/* ... předchozí CSS ... */
+
+/* ========================================= */
+/* 6. STATS & HISTORY & CHARTS               */
+/* ========================================= */
+
+/* Rozložení grafů v modalu */
+.charts-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.chart-box {
+    flex: 1;
+    /* Každý graf vezme polovinu */
+    min-width: 300px;
+    /* Na mobilu se zalomí pod sebe */
+    background: #fdfdfd;
+    border: 1px solid #f0f0f0;
+    border-radius: 12px;
+    padding: 10px;
+}
+
+/* Kompaktní statistiky - řádek */
+.stats-compact-row {
+    display: flex;
+    background: #f9f9f9;
+    border-radius: 12px;
+    border: 1px solid #eee;
+    padding: 15px;
+    justify-content: space-around;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-val {
+    font-size: 24px;
+    font-weight: 800;
+    color: #d11a2a;
+    display: block;
+    line-height: 1.2;
+}
+
+.stat-lbl {
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #888;
+    letter-spacing: 0.5px;
+}
+
+/* Historie - Seznam */
+.history-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f5f5f5;
+    font-size: 14px;
+}
+
+.history-item:last-child {
+    border-bottom: none;
+}
+
+.h-date {
+    font-weight: 600;
+    color: #333;
+    width: 100px;
+    font-family: monospace;
+}
+
+.h-name {
+    flex: 1;
+    color: #555;
+}
+
+.h-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.icon-btn {
+    border: none;
+    background: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 4px;
+    border-radius: 4px;
+    color: #999;
+    transition: all 0.2s;
+}
+
+.icon-btn:hover {
+    color: #d11a2a;
+    background: #fff5f5;
+}
+
+/* Chips History (Editace) */
+.history-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.history-chip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: #f0f0f0;
+    border-radius: 15px;
+    padding: 4px 10px;
+    font-size: 13px;
+    color: #333;
+    border: 1px solid #e0e0e0;
+}
+
+.chip-remove {
+    color: #bbb;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 1;
+}
+
+.chip-remove:hover {
+    color: #d11a2a;
+}
+
+/* Dialogs */
+.ui-dialog-content {
+    text-align: center;
+    font-size: 16px;
+    color: #444;
+    margin-bottom: 20px;
+}
+
+.ui-dialog-btns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+/* Toast */
+#toast {
+    visibility: hidden;
+    min-width: 200px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 8px;
+    padding: 12px 20px;
+    position: fixed;
+    z-index: 10000;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+    font-size: 14px;
+    opacity: 0;
+    transition: all 0.3s;
+}
+
+#toast.show {
+    visibility: visible;
+    opacity: 1;
+    bottom: 50px;
+}
+
+#toast.error {
+    background-color: #d11a2a;
+}
+
+/* Footer */
+.site-footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+    border-top: 1px solid #f0f0f0;
+    color: #aaa;
+    font-size: 12px;
+}
+
+.version-hash {
+    font-family: monospace;
+    background: #f5f5f5;
+    color: #888;
+    padding: 2px 5px;
+    border-radius: 4px;
+    margin-left: 5px;
+}
+/* --- MINIMÁLNÍ STYLY PRO NOVÉ FUNKCE (➕ / ✏️) --- */
+.quick-play-btn, .edit-btn {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 2px 6px;
+    margin-left: 5px;
+    transition: all 0.2s;
+}
+.quick-play-btn:hover { background: #f0fdf4; border-color: #22c55e; }
+.edit-btn:hover { background: #f8fafc; border-color: #64748b; }
+
+/* Download Button in Table */
+.download-btn {
+    background: #fff;
+    color: #007aff;
+    border: 1px solid #007aff;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-right: 5px;
+    height: 28px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.download-btn.active:hover {
+    background: #007aff;
+    color: #fff;
+}
+
+.download-btn.disabled {
+    background: #f8f8f8;
+    color: #ccc;
+    border-color: #eee;
+    cursor: not-allowed;
+    pointer-events: none;
+}

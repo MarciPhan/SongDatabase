@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<song xmlns="http://openlyrics.info/namespace/2009/song" version="0.8">
+  <properties>
+    <titles>
+      <title>Úžasná láska</title>
+    </titles>
+    <authors>
+      <author>Brother William</author>
+      <author>Pavel Mareš</author>
+      <author>Pavel mareš</author>
+    </authors>
+    <verseOrder>v1 v2 v3</verseOrder>
+  </properties>
+  <lyrics>
+    <verse name="v1">
+      <lines>Jak úžasná musí ta láska být,
+co přišla k nám o vše se rozdělit,
+dát novou vláhu poušti spálené,
+přiblížit nám nebe tak vzdálené.</lines>
+    </verse>
+    <verse name="v2">
+      <lines>Svou slávy říš opustil's kvůli nám,
+nemusel's jít,
+a přece chtěl jsi sám,
+tvář přátelskou jsi nikde neviděl,
+když proklínán jsi k popravišti šel.</lines>
+    </verse>
+    <verse name="v3">
+      <lines>Tam místo nás život jsi položil,
+vrátil ses zas,
+abys ho rozmnožil.
+Vím abych já moh' věčný život žít,
+musel můj Pán tou cestou kříže jít.</lines>
+    </verse>
+  </lyrics>
+</song>

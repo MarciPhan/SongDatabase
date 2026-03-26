@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<song xmlns="http://openlyrics.info/namespace/2009/song" version="0.8">
+  <properties>
+    <titles>
+      <title>Znovu hledím</title>
+    </titles>
+    <authors>
+      <author>Matt Redman</author>
+    </authors>
+    <verseOrder>v1a v1b v1c v1d v2a v2b</verseOrder>
+  </properties>
+  <lyrics>
+    <verse name="v1a">
+      <lines>Přemýšlím nad obětí Tvou,
+Ježíši,
+k prachu ses snížil,
+na smrt si šel.</lines>
+    </verse>
+    <verse name="v1b">
+      <lines>Kolikrát mě údiv znovu naplní,
+že dík Tobě můžu teď žít,
+dík Tobě můžu teď žít.
+Znovu hledím na kříž,
+kam si šel kvůli nám.</lines>
+    </verse>
+    <verse name="v1c">
+      <lines>Jsem pokořen Tvou láskou,
+srdce zlomené mám.
+Znovu díky vzdávám,
+znovu Ti svůj život chci dát.</lines>
+    </verse>
+    <verse name="v1d">
+      <lines>Díky za Tvůj kříž,
+díky za Tvůj kříž,
+díky za Tvé přátelství.
+Díky za Tvůj kříž,
+díky za Tvůj kříž,
+díky za Tvé přátelství.</lines>
+    </verse>
+    <verse name="v2a">
+      <lines>Vyvýšen teď vládneš,
+Králi,
+v nebesích,
+tam,
+před Tvým trůnem,
+i já budu stát.</lines>
+    </verse>
+    <verse name="v2b">
+      <lines>Radost mám,
+že získal si mi spasení,
+a znovu má chvála Ti zní,
+znovu má chvála Ti zní.</lines>
+    </verse>
+  </lyrics>
+</song>

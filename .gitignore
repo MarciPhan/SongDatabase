@@ -1,0 +1,11 @@
+# Backup and local files
+*.bak
+*.local
+*.swp
+
+# Application data
+data/
+# config.php is tracked but cleaned
+
+# Logs
+*.log
