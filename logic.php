@@ -3,6 +3,12 @@
 /* SOUBOR: logic.php (Backend Logic)         */
 /* ========================================= */
 
+// --- ANTI-CACHE: Wedos hosting může cachovat PHP výstup ---
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+header("Expires: 0");
+
 // --- AUTOMATICKÉ VERZOVÁNÍ ---
 $lastMod = filemtime(__FILE__); 
 $appVersion = date("Y.m.d-Hi", $lastMod) . ""; 

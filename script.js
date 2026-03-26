@@ -5,6 +5,21 @@ var songsDB = window.serverData.songs;
 var UPLOAD_CONFIG = window.serverData.uploadConfig;
 let currentEditingSong = null;
 
+// Wrapper pro API volání s anti-cache hlavičkami
+function apiPost(url, formData) {
+    return fetch(url, { 
+        method: 'POST', 
+        body: formData,
+        cache: 'no-store',
+        headers: { 'X-Requested-With': 'XMLHttpRequest' }
+    });
+}
+
+// Reload stránky s obejitím cache
+function forceReload() {
+    window.location.href = window.location.pathname + '?_=' + Date.now();
+}
+
 // Proměnné pro Chart.js instance (abychom je mohli zničit před překreslením)
 let chartInstanceTop = null;
 let chartInstanceFlop = null;
@@ -42,7 +57,7 @@ function undo() {
     const formData = new FormData();
     formData.append('action', 'overwrite_all');
     formData.append('data', JSON.stringify(songsDB));
-    fetch('api_manage_song.php', { method: 'POST', body: formData });
+    apiPost('api_manage_song.php', formData);
 }
 function updateUndoButton() {
     const btn = document.getElementById('undoBtn');
@@ -376,7 +391,7 @@ document.getElementById('manageForm').addEventListener('submit', function(e) {
     renderTable();
     showToast(action === "add" ? "Přidávám..." : "Ukládám...");
 
-    fetch('api_manage_song.php', { method: 'POST', body: formData })
+    apiPost('api_manage_song.php', formData)
         .then(r => r.json())
         .then(res => {
             if(res.ok) {
@@ -384,7 +399,7 @@ document.getElementById('manageForm').addEventListener('submit', function(e) {
             }
             else { 
                 showToast(res.error, true);
-                location.reload(); 
+                forceReload(); 
             }
             btn.disabled = false;
             btn.innerText = "Uložit";
@@ -393,7 +408,7 @@ document.getElementById('manageForm').addEventListener('submit', function(e) {
             showToast("Chyba sítě", true); 
             btn.disabled = false; 
             btn.innerText = "Uložit";
-            location.reload();
+            forceReload();
         });
 });
 
@@ -418,16 +433,16 @@ async function deleteSong() {
     renderTable();
     showToast("Mažu...");
     
-    fetch('api_manage_song.php', { method: 'POST', body: formData })
+    apiPost('api_manage_song.php', formData)
         .then(r => r.json())
         .then(res => {
             if(res.ok) showToast("Smazáno");
             else {
                 showToast(res.error, true);
-                location.reload();
+                forceReload();
             }
         })
-        .catch(err => location.reload());
+        .catch(err => forceReload());
 }
 
 // ==========================================
@@ -491,7 +506,7 @@ function callHistoryApi(action, date, reload = true, oldDate = null) {
     formData.append('date', date);
     if(oldDate) formData.append('old_date', oldDate);
     
-    fetch('api_manage_history.php', { method: 'POST', body: formData })
+    apiPost('api_manage_history.php', formData)
         .then(r => r.json())
         .then(res => {
             if(res.ok) {
@@ -578,7 +593,7 @@ document.getElementById('playForm').addEventListener('submit', function(e) {
     // Použijeme zkonvertované datum
     formData.set('date', dateVal);
     
-    fetch('api_local.php', { method: 'POST', body: formData })
+    apiPost('api_local.php', formData)
         .then(r => r.json())
         .then(res => {
             if(res.ok) {
@@ -628,17 +643,17 @@ async function recordQuickPlay(songName) {
     renderTable();
     showToast(`Zapsáno: ${songName}`);
     
-    fetch('api_local.php', { method: 'POST', body: formData })
+    apiPost('api_local.php', formData)
         .then(r => r.json())
         .then(res => {
             if(!res.ok) {
                 showToast("Při synchronizaci se vyskytla chyba: " + res.error, true);
-                location.reload();
+                forceReload();
             }
         })
         .catch(err => {
             showToast("Chyba sítě při synchronizaci", true);
-            location.reload();
+            forceReload();
         });
 }
 
@@ -663,13 +678,13 @@ async function deleteLastPlay(songName) {
     formData.append('action', 'remove');
     formData.append('date', lastDate);
     
-    fetch('api_manage_history.php', { method: 'POST', body: formData })
+    apiPost('api_manage_history.php', formData)
         .then(r => r.json())
         .then(res => {
             if(res.ok) showToast("Smazáno");
             else {
                 showToast("Chyba: " + res.error, true);
-                location.reload();
+                forceReload();
             }
         });
 }
@@ -738,7 +753,7 @@ function callHistoryApiGlobal(songName, action, date, oldDate = null) {
     formData.append('date', date);
     if(oldDate) formData.append('old_date', oldDate);
     
-    fetch('api_manage_history.php', { method: 'POST', body: formData })
+    apiPost('api_manage_history.php', formData)
         .then(r => r.json())
         .then(res => {
             if(res.ok) {
@@ -1057,7 +1072,7 @@ async function applyBulkAction() {
         clearSelection();
     }
 
-    fetch('api_manage_song.php', { method: 'POST', body: formData })
+    apiPost('api_manage_song.php', formData)
         .then(r => r.json())
         .then(res => {
             if (res.ok) {
@@ -1082,7 +1097,7 @@ async function applyBulkAction() {
                 renderTable();
             } else {
                 showToast(res.error, true);
-                if (action.startsWith('bulk')) location.reload(); // Rollback pro hromadné akce
+                if (action.startsWith('bulk')) forceReload(); // Rollback pro hromadné akce
             }
         });
 }
@@ -1218,7 +1233,7 @@ async function handleFileUpload(type) {
     showToast("Nahrávám...");
     
     try {
-        const r = await fetch('api_upload.php', { method: 'POST', body: formData });
+        const r = await apiPost('api_upload.php', formData);
         const res = await r.json();
         if (res.ok) {
             showToast("Uloženo");
@@ -1255,7 +1270,7 @@ async function deleteFile(type) {
     formData.append('action', 'delete');
     
     try {
-        const r = await fetch('api_upload.php', { method: 'POST', body: formData });
+        const r = await apiPost('api_upload.php', formData);
         const res = await r.json();
         if (res.ok) {
             showToast("Smazáno");
