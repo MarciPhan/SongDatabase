@@ -308,6 +308,7 @@ function openAddModal() {
     // Skrytí prvků, které jsou jen pro editaci
     document.getElementById('btnDelete').style.display = "none";
     document.getElementById('editHistorySection').style.display = "none";
+    document.getElementById('attachmentSection').style.display = "none"; // Skrýt sekci příloh pro přidání
     document.getElementById('newHistoryDate').value = getTypicalDate();
     
     openModal('modalManage');
@@ -332,9 +333,12 @@ function openEditModal(song) {
     document.getElementById('attachmentSection').style.display = "block";
     document.getElementById('newHistoryDate').value = getTypicalDate();
     
-    // Status příloh
-    document.getElementById('pdfStatus').innerText = song.pdf ? "✅ Nahráno" : "❌ Chybí";
-    document.getElementById('openlpStatus').innerText = song.openlp ? "✅ Nahráno" : "❌ Chybí";
+    // Update UI pro přílohy
+    document.getElementById('pdfStatus').innerText = song.pdf ? song.pdf : "Nenahráno";
+    document.getElementById('openlpStatus').innerText = song.openlp ? song.openlp : "Nenahráno";
+    
+    document.getElementById('btnDeletePdf').style.display = song.pdf ? "inline-block" : "none";
+    document.getElementById('btnDeleteOpenlp').style.display = song.openlp ? "inline-block" : "none";
     
     renderEditHistory(song.history);
     openModal('modalManage');
@@ -1223,8 +1227,9 @@ async function handleFileUpload(type) {
             const songOnDb = songsDB.find(x => x.name === currentEditingSong.name);
             if (songOnDb) songOnDb[type] = res.filename;
             
-            // UI update
-            document.getElementById(type + 'Status').innerHTML = `<span style="color:#22c55e">✅ Nahráno (${res.filename})</span>`;
+            // UI update (zobrazíme jméno souboru a tlačítko smazat)
+            document.getElementById(type + 'Status').innerText = res.filename;
+            document.getElementById('btnDelete' + type.charAt(0).toUpperCase() + type.slice(1)).style.display = "inline-block";
             renderTable(); // Osvěžit tlačítka v tabulce
         } else {
             showToast("Chyba: " + res.error, true);
@@ -1233,6 +1238,42 @@ async function handleFileUpload(type) {
         showToast("Chyba při komunikaci se serverem.", true);
     }
     input.value = ""; // Reset inputu
+}
+
+async function deleteFile(type) {
+    if (!currentEditingSong) return;
+    const songName = currentEditingSong.name;
+    
+    if (!await uiConfirm(`Opravdu chcete smazat ${type.toUpperCase()} přílohu u písně "${songName}"?`, "Smazat přílohu")) return;
+    
+    showToast("Mažu soubor...");
+    
+    const formData = new FormData();
+    formData.append('magic', UPLOAD_CONFIG.magic);
+    formData.append('song', songName);
+    formData.append('type', type);
+    formData.append('action', 'delete');
+    
+    try {
+        const r = await fetch('api_upload.php', { method: 'POST', body: formData });
+        const res = await r.json();
+        if (res.ok) {
+            showToast("Smazáno");
+            // Aktualizace v lokální DB
+            currentEditingSong[type] = "";
+            const songOnDb = songsDB.find(x => x.name === songName);
+            if (songOnDb) songOnDb[type] = "";
+            
+            // UI update
+            document.getElementById(type + 'Status').innerText = "Nenahráno";
+            document.getElementById('btnDelete' + type.charAt(0).toUpperCase() + type.slice(1)).style.display = "none";
+            renderTable();
+        } else {
+            showToast("Chyba: " + res.error, true);
+        }
+    } catch (e) {
+        showToast("Chyba při komunikaci se serverem.", true);
+    }
 }
 
 window.addEventListener('DOMContentLoaded', () => {

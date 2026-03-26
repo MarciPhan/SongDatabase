@@ -22,10 +22,51 @@ if (!empty($_POST['website'])) {
 
 $songName = $_POST['song'] ?? "";
 $type = $_POST['type'] ?? ""; // "pdf" nebo "openlp"
-$file = $_FILES['file'] ?? null;
+$action = $_POST['action'] ?? "upload";
 
-if (!$songName || !$type || !$file) {
-    echo json_encode(["ok" => false, "error" => "Chybí parametry (píseň, typ nebo soubor)."]);
+if (!$songName || !$type) {
+    echo json_encode(["ok" => false, "error" => "Chybí parametry (píseň nebo typ)."]);
+    exit;
+}
+
+// Společná konfigurace složek
+$targetDir = "";
+if ($type === "pdf") {
+    $targetDir = __DIR__ . "/pdf/";
+} elseif ($type === "openlp") {
+    $targetDir = __DIR__ . "/openlp/";
+} else {
+    echo json_encode(["ok" => false, "error" => "Neplatný typ."]);
+    exit;
+}
+
+// --- AKCE: SMAZAT ---
+if ($action === "delete") {
+    $data = [];
+    if (file_exists($LOCAL_DB)) {
+        $data = json_decode(file_get_contents($LOCAL_DB), true);
+    }
+    
+    foreach ($data as &$song) {
+        if ($song['name'] === $songName) {
+            if (!empty($song[$type])) {
+                $filePath = $targetDir . $song[$type];
+                if (file_exists($filePath)) @unlink($filePath);
+                $song[$type] = "";
+            }
+            break;
+        }
+    }
+    
+    file_put_contents($LOCAL_DB, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+    echo json_encode(["ok" => true]);
+    exit;
+}
+
+// --- AKCE: NAHRÁT ---
+$file = $_FILES['file'] ?? null;
+if (!$file) {
+    echo json_encode(["ok" => false, "error" => "Chybí soubor k nahrání."]);
     exit;
 }
 
@@ -35,20 +76,8 @@ if ($file['size'] > 10 * 1024 * 1024) {
     exit;
 }
 
-// Validace typu
-$allowedExts = [];
-$targetDir = "";
-if ($type === "pdf") {
-    $allowedExts = ["pdf"];
-    $targetDir = __DIR__ . "/pdf/";
-} elseif ($type === "openlp") {
-    $allowedExts = ["xml", "sng", "txt", "pdf"];
-    $targetDir = __DIR__ . "/openlp/";
-} else {
-    echo json_encode(["ok" => false, "error" => "Neplatný typ souboru."]);
-    exit;
-}
-
+// Validace přípony
+$allowedExts = ($type === "pdf") ? ["pdf"] : ["xml", "sng", "txt", "pdf"];
 $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
 if (!in_array($ext, $allowedExts)) {
     echo json_encode(["ok" => false, "error" => "Nepovolená přípona: .$ext"]);
@@ -68,6 +97,11 @@ if (move_uploaded_file($file['tmp_name'], $targetPath)) {
     $found = false;
     foreach ($data as &$song) {
         if ($song['name'] === $songName) {
+            // Smažeme starý soubor, pokud existoval
+            if (!empty($song[$type]) && $song[$type] !== $safeName) {
+                $oldPath = $targetDir . $song[$type];
+                if (file_exists($oldPath)) @unlink($oldPath);
+            }
             $song[$type] = $safeName;
             $found = true;
             break;

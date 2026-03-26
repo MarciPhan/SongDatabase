@@ -215,21 +215,28 @@ require_once "logic.php";
             <div id="attachmentSection" style="margin-top:20px; padding-top:15px; border-top:1px solid #eee; display:none;">
                 <label class="form-label"><?= $svgAttach ?> Přílohy (PDF / OpenLP)</label>
                 
-                <div style="margin-bottom:12px;">
-                    <div style="font-size:12px; color:#666; margin-bottom:4px;">Zpěvník (PDF): <span id="pdfStatus" style="font-weight:600;">-</span></div>
-                    <div style="display:flex; gap:8px;">
+                <div style="margin-bottom:12px; display:flex; align-items:center; justify-content:space-between; background:#f9f9f9; padding:8px; border-radius:6px;">
+                    <div style="font-size:12px; color:#666;">Zpěvník (PDF): <span id="pdfStatus" style="font-weight:600;">-</span></div>
+                    <div style="display:flex; gap:5px;">
                         <input type="file" id="uploadPdfInput" accept=".pdf" style="display:none;" onchange="handleFileUpload('pdf')">
-                        <button type="button" class="btn btn-secondary" style="font-size:13px; padding:6px 12px;" onclick="document.getElementById('uploadPdfInput').click()">Nahrát PDF</button>
+                        <button type="button" class="btn btn-secondary" style="width:auto; padding:5px 12px; font-size:11px;" onclick="document.getElementById('uploadPdfInput').click()">Nahrát</button>
+                        <button id="btnDeletePdf" type="button" class="btn btn-secondary danger" style="width:auto; padding:5px 8px; font-size:11px; display:none; background:#fff; color:#d11a2a; border:1px solid #d11a2a;" onclick="deleteFile('pdf')" title="Smazat PDF">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                        </button>
                     </div>
                 </div>
 
-                <div>
-                    <div style="font-size:12px; color:#666; margin-bottom:4px;">Projektor (OpenLP): <span id="openlpStatus" style="font-weight:600;">-</span></div>
-                    <div style="display:flex; gap:8px;">
+                <div style="display:flex; align-items:center; justify-content:space-between; background:#f9f9f9; padding:8px; border-radius:6px;">
+                    <div style="font-size:12px; color:#666;">Projektor (OpenLP): <span id="openlpStatus" style="font-weight:600;">-</span></div>
+                    <div style="display:flex; gap:5px;">
                         <input type="file" id="uploadOpenlpInput" accept=".xml,.sng,.txt,.pdf" style="display:none;" onchange="handleFileUpload('openlp')">
-                        <button type="button" class="btn btn-secondary" style="font-size:13px; padding:6px 12px;" onclick="document.getElementById('uploadOpenlpInput').click()">Nahrát OpenLP</button>
+                        <button type="button" class="btn btn-secondary" style="width:auto; padding:5px 12px; font-size:11px;" onclick="document.getElementById('uploadOpenlpInput').click()">Nahrát</button>
+                        <button id="btnDeleteOpenlp" type="button" class="btn btn-secondary danger" style="width:auto; padding:5px 8px; font-size:11px; display:none; background:#fff; color:#d11a2a; border:1px solid #d11a2a;" onclick="deleteFile('openlp')" title="Smazat OpenLP">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                        </button>
                     </div>
                 </div>
+            </div>
                 
                 <!-- Honeypot proti botům -->
                 <input type="text" name="website" style="display:none !important;" tabindex="-1" autocomplete="off">
