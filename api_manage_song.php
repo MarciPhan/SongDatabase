@@ -278,7 +278,7 @@ function saveAndSync($data) {
     // Seřadit
     usort($data, fn($a, $b) => strcasecmp($a['name'], $b['name']));
 
-    if (file_put_contents($LOCAL_DB, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE))) {
+    if (file_put_contents($LOCAL_DB, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE), LOCK_EX)) {
         // Trigger Sync
         if (isset($API_URL) && $API_URL) {
             $syncUrl = $API_URL . "?action=sync_to_sheet";

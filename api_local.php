@@ -59,7 +59,7 @@ foreach ($data as &$s) {
 
 if ($found) {
     // Uložit lokálně
-    $result = file_put_contents($LOCAL_DB, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+    $result = file_put_contents($LOCAL_DB, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE), LOCK_EX);
     
     if ($result === false) {
         echo json_encode(["error" => "Chyba zápisu do souboru. Zkontrolujte oprávnění."]);

@@ -500,6 +500,31 @@ async function editHistoryDate(oldDate) {
 // Volání API pro historii (lokální update jedné písně)
 function callHistoryApi(action, date, reload = true, oldDate = null) {
     saveUndoState();
+    
+    // Optimistický update v paměti
+    if (currentEditingSong) {
+        if (!currentEditingSong.history) currentEditingSong.history = [];
+        if (action === 'add') {
+            if (!currentEditingSong.history.includes(date)) currentEditingSong.history.push(date);
+        } else if (action === 'remove') {
+            currentEditingSong.history = currentEditingSong.history.filter(d => d !== date);
+        } else if (action === 'update') {
+            currentEditingSong.history = currentEditingSong.history.filter(d => d !== oldDate);
+            if (!currentEditingSong.history.includes(date)) currentEditingSong.history.push(date);
+        }
+        
+        currentEditingSong.history.sort((a,b) => new Date(b) - new Date(a));
+        currentEditingSong.count = currentEditingSong.history.length;
+        currentEditingSong.last = currentEditingSong.history[0] || "";
+        
+        // Synchronizace se songsDB
+        const idx = songsDB.findIndex(s => s.name === currentEditingSong.name);
+        if (idx > -1) songsDB[idx] = JSON.parse(JSON.stringify(currentEditingSong));
+        
+        renderEditHistory(currentEditingSong.history);
+        renderTable();
+    }
+
     const formData = new FormData();
     formData.append('song', currentEditingSong.name);
     formData.append('action', action);
@@ -510,13 +535,21 @@ function callHistoryApi(action, date, reload = true, oldDate = null) {
         .then(r => r.json())
         .then(res => {
             if(res.ok) {
+                // Přepsat finálními daty ze serveru pro jistotu
                 currentEditingSong = res.song;
                 const idx = songsDB.findIndex(s => s.name === res.song.name);
                 if (idx > -1) songsDB[idx] = res.song;
                 renderEditHistory(res.song.history);
                 renderTable();
                 showToast("Uloženo");
-            } else showToast("Chyba: " + res.error, true);
+            } else {
+                showToast("Chyba: " + res.error, true);
+                forceReload(); // Rollback při chybě
+            }
+        })
+        .catch(err => {
+            showToast("Chyba sítě", true);
+            forceReload();
         });
 }
 
@@ -590,6 +623,18 @@ document.getElementById('playForm').addEventListener('submit', function(e) {
     btn.disabled = true; 
     btn.innerText = "Ukládám...";
     
+    // Optimistická aktualizace
+    if (foundSong) {
+        if (!foundSong.history) foundSong.history = [];
+        foundSong.history.push(dateVal);
+        foundSong.history.sort((a,b) => new Date(b) - new Date(a));
+        foundSong.last = foundSong.history[0];
+        foundSong.count = foundSong.history.length;
+    }
+    closeModal('modalPlay');
+    renderTable();
+    showToast("Zapisuji...");
+
     // Použijeme zkonvertované datum
     formData.set('date', dateVal);
     
@@ -597,16 +642,6 @@ document.getElementById('playForm').addEventListener('submit', function(e) {
         .then(r => r.json())
         .then(res => {
             if(res.ok) {
-                const s = songsDB.find(x => x.name === songName);
-                if (s) {
-                    if (!s.history) s.history = [];
-                    s.history.push(dateVal);
-                    s.history.sort((a,b) => new Date(b) - new Date(a));
-                    s.last = s.history[0];
-                    s.count = s.history.length;
-                }
-                closeModal('modalPlay');
-                renderTable();
                 showToast("Zapsáno");
                 btn.disabled = false;
                 btn.innerText = "Uložit";
@@ -615,7 +650,14 @@ document.getElementById('playForm').addEventListener('submit', function(e) {
                 showToast("Chyba: " + res.error, true); 
                 btn.disabled = false; 
                 btn.innerText = "Uložit"; 
+                forceReload(); // Rollback
             }
+        })
+        .catch(err => {
+            showToast("Chyba sítě", true);
+            btn.disabled = false;
+            btn.innerText = "Uložit";
+            forceReload();
         });
 });
 
@@ -686,6 +728,10 @@ async function deleteLastPlay(songName) {
                 showToast("Chyba: " + res.error, true);
                 forceReload();
             }
+        })
+        .catch(err => {
+            showToast("Chyba sítě", true);
+            forceReload();
         });
 }
 
@@ -747,6 +793,27 @@ async function deleteHistoryItem(songName, date) {
 
 function callHistoryApiGlobal(songName, action, date, oldDate = null) {
     saveUndoState();
+    
+    // Optimistický update
+    const song = songsDB.find(s => s.name === songName);
+    if (song) {
+        if (!song.history) song.history = [];
+        if (action === 'add') {
+            if (!song.history.includes(date)) song.history.push(date);
+        } else if (action === 'remove') {
+            song.history = song.history.filter(d => d !== date);
+        } else if (action === 'update') {
+            song.history = song.history.filter(d => d !== oldDate);
+            if (!song.history.includes(date)) song.history.push(date);
+        }
+        song.history.sort((a,b) => new Date(b) - new Date(a));
+        song.count = song.history.length;
+        song.last = song.history[0] || "";
+        
+        renderGlobalHistory();
+        renderTable();
+    }
+
     const formData = new FormData();
     formData.append('song', songName);
     formData.append('action', action);
@@ -759,11 +826,18 @@ function callHistoryApiGlobal(songName, action, date, oldDate = null) {
             if(res.ok) {
                 const idx = songsDB.findIndex(s => s.name === res.song.name);
                 if (idx > -1) songsDB[idx] = res.song;
-                renderGlobalHistory(); // Re-render the history modal content
+                renderGlobalHistory(); 
                 renderTable();
                 showToast("Uloženo");
             }
-            else showToast("Chyba: " + res.error, true);
+            else {
+                showToast("Chyba: " + res.error, true);
+                forceReload();
+            }
+        })
+        .catch(err => {
+            showToast("Chyba sítě", true);
+            forceReload();
         });
 }
 
@@ -1099,6 +1173,10 @@ async function applyBulkAction() {
                 showToast(res.error, true);
                 if (action.startsWith('bulk')) forceReload(); // Rollback pro hromadné akce
             }
+        })
+        .catch(err => {
+            showToast("Chyba sítě", true);
+            forceReload();
         });
 }
 
